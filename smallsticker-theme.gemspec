@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "smallsticker-theme"
-  spec.version       = "0.1.1"
+  spec.version       = "1.0.0"
   spec.authors       = ["Rain Wu"]
   spec.email         = ["rain@smallsticker.com"]
 
