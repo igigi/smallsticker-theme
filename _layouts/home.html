@@ -2,27 +2,8 @@
 layout: default
 ---
 
-<div class="home">
+<div class="ui divider"></div>
 
-
-
-  <h1 class="page-heading">新闻</h1>
-
+<div class="ui container">
   {{ content }}
-
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
-        <span class="post-meta">{{ post.date | date: date_format }}</span>
-
-        <h2>
-          <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
-
-  <p class="rss-subscribe">订阅 <a href="{{ "/feed.xml" | relative_url }}">RSS</a></p>
-
 </div>

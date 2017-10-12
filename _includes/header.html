@@ -1,26 +1,34 @@
-<div class="site-logo">
-  <a href="/"><img src="/assets/images/logo.png" /></a>
-</div>
-<header class="site-header">
-
-  <div class="wrapper">
-
-    {% assign default_paths = site.pages | sort: 'nav-order' | map: "path" %}
-
-    {% assign page_paths = site.header_pages | default: default_paths %}
-
-    {% if page_paths %}
-      <nav class="site-nav">
-
-          {% for path in page_paths %}
-            {% assign my_page = site.pages | where: "path", path | first %}
-
-            {% if my_page.nav-order %}
-            <a class="page-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
-            {% endif %}
-          {% endfor %}
-
-      </nav>
-    {% endif %}
+  <div class="ui main text container">
+    <h1 class="ui header">小贴画</h1>
+    <p>给自己一个标签，激励自己！</p>
   </div>
-</header>
+
+
+  <div class="ui borderless main menu">
+    <div class="ui text container">
+      <a href="/" class="header item">
+        <img class="logo" src="assets/images/logo.png">
+        小贴画
+      </a>
+      {% assign default_paths = site.pages | sort: 'nav-order' | map: "path" %}
+
+      {% assign page_paths = site.header_pages | default: default_paths %}
+
+      {% if page_paths %}
+        {% for path in page_paths %}
+          {% assign my_page = site.pages | where: "path", path | first %}
+
+          {% if my_page.nav-order %}
+          <a class="item" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+
+      <a class="ui icon button item right floated">
+        <i class="gift icon big red"></i>
+      </a>
+
+
+    </div>
+  </div>
