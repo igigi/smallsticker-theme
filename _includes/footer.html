@@ -1,46 +1,55 @@
-<footer class="site-footer">
+<div class="ui inverted vertical footer segment">
+  <div class="ui center aligned container">
+    <div class="ui stackable inverted divided grid">
+      <div class="three wide column">
+        <h4 class="ui inverted header">产品类别</h4>
+        <div class="ui inverted link list">
 
-  <div class="wrapper">
 
-    <h2 class="footer-heading">{{ site.title | escape }}</h2>
+          {% assign default_paths = site.pages | sort: 'nav-order' | map: "path" %}
 
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li>
-            {% if site.author %}
-              {{ site.author | escape }}
-            {% else %}
-              {{ site.title | escape }}
-            {% endif %}
-            </li>
-            {% if site.email %}
-            <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
-            {% endif %}
-        </ul>
-      </div>
+          {% assign page_paths = site.header_pages | default: default_paths %}
 
-      <div class="footer-col footer-col-2">
-        <ul class="social-media-list">
-          {% if site.github_username %}
-          <li>
-            {% include icon-github.html username=site.github_username %}
-          </li>
+          {% if page_paths %}
+            {% for path in page_paths %}
+              {% assign my_page = site.pages | where: "path", path | first %}
+
+              {% if my_page.nav-order and my_page.nav-order != 0 %}
+              <a class="item" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
+              {% endif %}
+            {% endfor %}
           {% endif %}
-
-          {% if site.twitter_username %}
-          <li>
-            {% include icon-twitter.html username=site.twitter_username %}
-          </li>
-          {% endif %}
-        </ul>
+        </div>
       </div>
-
-      <div class="footer-col footer-col-3">
-        <p>{{ site.description | escape }}</p>
+      <div class="three wide column">
+        <h4 class="ui inverted header">支付方式</h4>
+        <div class="ui inverted link list">
+          <div class="item">微信支付</div>
+          <div class="item">支付宝</div>
+        </div>
+      </div>
+      <div class="three wide column">
+        <h4 class="ui inverted header">配送方式</h4>
+        <div class="ui inverted link list">
+          <div class="item">顺丰</div>
+          <div class="item">EMS</div>
+        </div>
+      </div>
+      <div class="seven wide column">
+        <h4 class="ui inverted header">邮件订阅</h4>
+        <div class="ui fluid action input">
+          <input type="text" placeholder="填写邮箱地址，接收新品更新和最新的博客文章...">
+          <div class="ui button">订阅</div>
+        </div>
       </div>
     </div>
-
+    <div class="ui inverted section divider"></div>
+    <img src="assets/images/logo.png" class="ui centered mini image">
+    <div class="ui horizontal inverted small divided link list">
+      <a class="item" href="#">站点地图</a>
+      <a class="item" href="mailto:{{ site.email }}">联系我们</a>
+      <a class="item" href="#">条款和条件</a>
+      <a class="item" href="#">隐私政策</a>
+    </div>
   </div>
-
-</footer>
+</div>

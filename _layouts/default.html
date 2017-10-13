@@ -2,19 +2,17 @@
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
 
   {% include head.html %}
-
   <body>
-
     {% include header.html %}
+    <div class="overlay">
+      <div class="ui labeled icon vertical menu">
+        <a class="item" data-tooltip="微信号：small-sticker，或搜索“小贴画”关注" data-position="right center"><i class="wechat green icon"></i> 微信</a>
 
-    <main class="page-content">
-      <div class="wrapper">
-        {{ content }}
+        <a class="item" href="http://weibo.com/6152967474" target="_blank"><i class="weibo red icon"></i> 微博</a>
+
       </div>
-    </main>
-
+    </div>
+      {{ content }}
     {% include footer.html %}
-
   </body>
-
 </html>
