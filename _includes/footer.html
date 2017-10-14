@@ -37,16 +37,18 @@
       </div>
       <div class="seven wide column">
         <h4 class="ui inverted header">邮件订阅</h4>
-        <div class="ui fluid action input">
-          <input type="text" placeholder="填写邮箱地址，接收新品更新和最新的博客文章...">
-          <div class="ui button">订阅</div>
-        </div>
+        <form class="ui form">
+          <div class="ui fluid action input">
+            <input type="text" placeholder="填写邮箱地址，接收新品更新和最新的博客文章...">
+            <div class="ui button">订阅</div>
+          </div>
+        </form>
       </div>
     </div>
     <div class="ui inverted section divider"></div>
-    <img src="assets/images/logo.png" class="ui centered mini image">
+    <img src="{{"assets/images/logo.png" | relative_url}}" class="ui centered mini image">
     <div class="ui horizontal inverted small divided link list">
-      <a class="item" href="#">站点地图</a>
+      <a class="item" href="{{"/sitemap.xml" | relatieve_url}}">站点地图</a>
       <a class="item" href="mailto:{{ site.email }}">联系我们</a>
       <a class="item" href="#">条款和条件</a>
       <a class="item" href="#">隐私政策</a>
