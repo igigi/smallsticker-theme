@@ -1,14 +1,21 @@
 ---
-layout: default
+layout: home
 ---
-<div class="ui divider"></div>
 
+<div class="ui breadcrumb">
+  <a class="section" href="/">主页</a>
+  <i class="right angle icon divider"></i>
+  <a class="section" href="/">新闻列表</a>
+  <i class="right angle icon divider"></i>
+  <div class="active section">新闻详情</div>
+</div>
 <div class="ui raised very padded container text segment">
+
 
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <img class="ui right floated image" src="{{"assets/images/wireframe/white-image.png" | relative_url}}" />
+    <img class="ui bordered rounded centered image" src="{{ page.banner-image | relative_url}}" />
     <h1 class="ui dividing header" itemprop="name headline">{{ page.title | escape }}
 
     <div class="sub header">
@@ -29,10 +36,32 @@ layout: default
   <div class="post-content" itemprop="articleBody">
     {{ content }}
   </div>
-
-  {% if site.disqus.shortname %}
-    {% include disqus_comments.html %}
-  {% endif %}
+  <div class="ui divider" >
+  </div>
+  <a class="ui red mini button" id="shareBtn" href="javascript:void(0)" target="_blank">
+    <i class="weibo icon"></i>
+    微博分享
+  </a>
+  <button class="ui green mini button">
+    <i class="wechat icon"></i>
+    微信分享
+  </button>
 </article>
-
+{% if site.disqus.shortname %}
+  {% include disqus_comments.html %}
+{% endif %}
 </div>
+<script>
+  /* weiboShare */
+  function weiboShare(){
+      var wb_shareBtn = document.getElementById("shareBtn")
+          wb_url = document.URL, //获取当前页面地址，也可自定义例：wb_url = "http://liuyanzhao.com"
+          wb_appkey = "380468695",//你的app key
+          wb_title = "{{ page.title }}",
+          wb_ralateUid = "6152967474",//微博id，获得你的用户名
+          wb_pic = "{{ page.banner-image | absolute_url}}",
+          wb_language = "zh_cn";
+      wb_shareBtn.setAttribute("href","http://service.weibo.com/share/share.php?url="+wb_url+"&appkey="+wb_appkey+"&title="+wb_title+"&pic="+wb_pic+"&ralateUid="+wb_ralateUid+"&language="+wb_language+"");
+  }
+  weiboShare();
+</script>

@@ -1,37 +1,36 @@
 ---
-layout: default
+layout: home
 ---
-<h2>Posts related to: {{ page.title }}</h2>
-
-{% unless page.content == '' %}
-  <p>{{ page.content }}</p>
-{% endunless %}
-
-{% unless site.tags[page.tag] | size > 0 %}
-  <p>No posts in this category at this time.</p>
-{% endunless %}
-
-{% for post in site.tags[page.tag] %}
-<div class="post-preview">
-    <a href="{{ post.url | prepend: site.baseurl }}">
-        <h2 class="post-title">
-            {{ post.title }}
-        </h2>
-        {% if post.subtitle %}
-        <h3 class="post-subtitle">
-            {{ post.subtitle }}
-        </h3>
-        {% endif %}
-    </a>
-    <p class="post-meta">
-      Posted by
-      {% if post.author %}
-        {{ post.author }}
-      {% else %}
-        {{ site.title }}
-      {% endif %}
-      on {{ post.date | date: "%B %-d, %Y" }}
-    </p>
+<div class="ui breadcrumb">
+  <a class="section" href="/">主页</a>
+  <i class="right angle icon divider"></i>
+  <a class="section" href="/">新闻</a>
+  <i class="right angle icon divider"></i>
+  <div class="active section" href="/" >{{ page.title }}</div>
 </div>
-<hr>
-{% endfor %}
+<h1 class="ui dividing header">{{ page.title }}</h1>
+<div class="ui divided items">
+  {% for post in site.tags[page.tag] %}
+  {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
+    <div class="item">
+      <div class="image">
+        <img src="{{ post.banner-image | relative_url }}">
+      </div>
+      <div class="content">
+        <a class="header" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+        <div class="meta">
+          <span class="cinema">{{ post.date | date: date_format }}</span>
+        </div>
+        <div class="description">
+          <p>{{ post.excerpt}}</p>
+        </div>
+        <div class="extra">
+          <a class="ui right floated primary button"  href="{{ post.url | relative_url }}">
+            阅读更多
+            <i class="right chevron icon"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
