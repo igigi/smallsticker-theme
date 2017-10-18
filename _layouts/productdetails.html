@@ -1,24 +1,46 @@
 ---
-layout: default
+layout: products
 head:
   smallsticker-button.html
 ---
-<div class="product-details">
-  <img src="{{ page.image }}" alt="{{ page.name }}" class="thumbnail"/>
-  <div class="product-description">
-    <p>{{ page.name }}</p>
+<div class="ui breadcrumb">
+  <a class="section" href="/">主页</a>
+  <i class="right angle icon divider"></i>
+  <a class="section" href="/sticker.html">贴纸</a>
+  <i class="right angle icon divider"></i>
+  <div class="active section">贴纸详情</div>
+</div>
 
-    <p>
-      {{ page.content }}
-    </p>
+<div class="ui raised very padded container text segment">
+<article>
+  <header>
+    <img class="ui bordered rounded centered image" src="{{ page.image | relative_url }}" alt="{{ page.name }}" />
+    <h1 class="ui dividing header">{{ page.name | escape }}</h1>
+      <h2 class="sub header">
+        <span>价格：<i class="yen icon"></i>{{ page.price }}</span> |
+        {% for tag in page.tags %}
+            <a class="ui teal mini tag label" href="/tags/{{ tag }}">{{ tag | capitalize }}</a>
+        {% endfor %}
+      </h2>
+  </header>
 
-    <button class="snipcart-add-item"
-      data-item-name="{{ page.name }}"
-      data-item-id="{{ page.sku }}"
-      data-item-image="{{ page.image }}"
-      data-item-url="{{ site.baseurl }}"
-      data-item-price="{{ page.price }}">
-      Buy it for {{ page.price }} $
-    </button>
-  </div>
+  <div> {{ content }} </div>
+  <div class="ui divider" ></div>
+  <a class="ui red mini button" id="shareBtn" target="_blank">
+    <i class="weibo icon"></i>
+    微博分享
+  </a>
+  <button class="ui green mini button">
+    <i class="wechat icon"></i>
+    微信分享
+  </button>
+  <button class="snipcart-add-item ui button"
+    data-item-name="{{ page.name }}"
+    data-item-id="{{ page.sku }}"
+    data-item-image="{{ page.image }}"
+    data-item-url="{{ site.baseurl }}"
+    data-item-price="{{ page.price }}">
+    Buy it for {{ page.price }} $
+  </button>
+</article>
 </div>

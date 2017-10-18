@@ -10,12 +10,10 @@ layout: home
   <div class="active section">新闻详情</div>
 </div>
 <div class="ui raised very padded container text segment">
+<article itemscope itemtype="http://schema.org/BlogPosting">
 
-
-<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-
-  <header class="post-header">
-    <img class="ui bordered rounded centered image" src="{{ page.banner-image | relative_url}}" />
+  <header>
+    <img class="ui bordered rounded centered image" src="{{ page.banner-image | relative_url}}" alt="{{ page.title }}" />
     <h1 class="ui dividing header" itemprop="name headline">{{ page.title | escape }}
 
     <div class="sub header">
@@ -47,10 +45,10 @@ layout: home
     微信分享
   </button>
 </article>
+</div>
 {% if site.disqus.shortname %}
   {% include disqus_comments.html %}
 {% endif %}
-</div>
 <script>
   /* weiboShare */
   function weiboShare(){

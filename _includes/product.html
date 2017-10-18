@@ -1,17 +1,14 @@
-<div class="product">
+<a class="ui image" href="{{ site.baseurl }}{{ product.url }}">
+  <img  src="{{ product.image || relative_url }}" alt="{{ product.name }}"/>
+</a>
 
-  <a class="product" href="{{ site.baseurl }}{{ product.url }}">
-    <img src="{{ product.image }}" alt="{{ product.name }}" class="thumbnail"/>
-    <p>{{ product.name }}</p>
-  </a>
-
-  <button class="snipcart-add-item"
-    data-item-name="{{ product.name }}"
-    data-item-id="{{ product.sku }}"
-    data-item-image="{{ product.image }}"
-    data-item-url="{{ site.baseurl }}"
-    data-item-price="{{ product.price }}">
-    Buy it for {{ product.price }} $
-  </button>
-
+<div class="content">
+  <a class="header" href="{{ site.baseurl }}{{ product.url }}">{{ product.name }}</a>
+  <div class="meta">
+    价格：<i class="yen icon"></i>{{ product.price }}
+  </div>
+</div>
+<div class="ui bottom attached red button">
+  <i class="archive icon"></i>
+  放入礼盒
 </div>
