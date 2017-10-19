@@ -3,27 +3,31 @@ layout: products
 head:
   smallsticker-button.html
 ---
-<div class="ui breadcrumb">
+<div class="ui top attached breadcrumb">
   <a class="section" href="/">主页</a>
   <i class="right angle icon divider"></i>
-  <a class="section" href="/sticker.html">贴纸</a>
+  <a class="section" href="/{{ page.categories }}">{{ page.categories }}</a>
   <i class="right angle icon divider"></i>
-  <div class="active section">贴纸详情</div>
+  <div class="active section">{{ page.categories }}详情</div>
 </div>
-
-<div class="ui raised very padded container text segment">
-<article>
-  <header>
-    <img class="ui bordered rounded centered image" src="{{ page.image | relative_url }}" alt="{{ page.name }}" />
-    <h1 class="ui dividing header">{{ page.name | escape }}</h1>
-      <h2 class="sub header">
-        <span>价格：<i class="yen icon"></i>{{ page.price }}</span> |
-        {% for tag in page.tags %}
-            <a class="ui teal mini tag label" href="/tags/{{ tag }}">{{ tag | capitalize }}</a>
-        {% endfor %}
-      </h2>
-  </header>
-
+<h1 class="ui dividing header">{{ page.name | escape }}</h1>
+<div class="ui relaxed grid">
+  <div class="eight wide column">
+  <div class="ui image">
+    <div class="ui labels">
+      {% for tag in page.tags %}
+      <div class="ui teal ribbon label">
+        <a  href="/标签/{{ page.categories }}标签/{{ tag }}">{{ tag | capitalize }}</a>
+      </div><br /><br />
+      {% endfor %}
+    </div>
+    <img src="{{ page.image | relative_url }}" alt="{{ page.name }}">
+  </div>
+  </div>
+  <div class="eight wide column">
+  <h2 class="sub header">
+    <span>价格：<i class="yen icon"></i>{{ page.price }}</span>
+  </h2>
   <div> {{ content }} </div>
   <div class="ui divider" ></div>
   <a class="ui red mini button" id="shareBtn" target="_blank">
@@ -42,5 +46,5 @@ head:
     data-item-price="{{ page.price }}">
     Buy it for {{ page.price }} $
   </button>
-</article>
+  </div>
 </div>

@@ -1,0 +1,20 @@
+{% assign products = site.products | where: "categories", {{page.title}} %}
+{% assign tags =  site.products | where: "categories", {{page.title}} | map: 'tags' | join: ','  | split: ',' | uniq %}
+<div class="ui breadcrumb">
+  <a class="section" href="/">主页</a>
+  <i class="right angle icon divider"></i>
+  <div class="active section">{{page.title}}</div>
+</div>
+<h1 class="ui dividing header">{{page.title}}</h1>
+<span>标签：</span>
+{% for tag in tags %}
+    <a class="ui teal tag label" href="/标签/{{ page.title }}标签/{{ tag }}">{{ tag | capitalize }}</a>
+{% endfor %}
+
+<div class="ui four doubling stackable cards">
+  {% for product in products %}
+    <div class="card">
+    {% include product.html %}
+    </div>
+  {% endfor %}
+</div>
