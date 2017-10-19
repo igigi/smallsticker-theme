@@ -2,8 +2,6 @@
     <h1 class="ui header">小贴画</h1>
     <p>给自己一个标签，表达自我，激励自己！</p>
   </div>
-
-
   <div class="ui borderless main menu">
     <div class="ui text container">
       <a href="/" class="header item">
@@ -11,24 +9,17 @@
         小贴画
       </a>
       {% assign default_paths = site.pages | sort: 'nav-order' | map: "path" %}
-
       {% assign page_paths = site.header_pages | default: default_paths %}
-
       {% if page_paths %}
         {% for path in page_paths %}
           {% assign my_page = site.pages | where: "path", path | first %}
-
           {% if my_page.nav-order %}
           <a class="item {% if my_page.url == page.url %} active {% endif %}" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
           {% endif %}
         {% endfor %}
       {% endif %}
-
-
       <a class="ui icon button item right floated">
         <i class="gift icon big red"></i>
       </a>
-
-
     </div>
   </div>
