@@ -9,7 +9,9 @@ $(document)
       type: 'fixed',
       offset: 80
     });
-
+    $('.gift-box').click(function(){
+      $('.fullscreen.modal').modal('show');
+    });
     // lazy load images
     $('.image').visibility({
       type: 'image',

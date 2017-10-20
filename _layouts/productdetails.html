@@ -16,9 +16,7 @@ head:
   <div class="ui image">
     <div class="ui labels">
       {% for tag in page.tags %}
-      <div class="ui teal ribbon label">
-        <a  href="/标签/{{ page.categories }}标签/{{ tag }}">{{ tag | capitalize }}</a>
-      </div><br /><br />
+        <a class="ui teal ribbon label"  href="/标签/{{ page.categories }}标签/{{ tag }}">{{ tag | capitalize }}</a><br /><br />
       {% endfor %}
     </div>
     <img src="{{ page.image | relative_url }}" alt="{{ page.name }}">

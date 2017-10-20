@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:wb="http://open.weibo.com/wb" lang="{{ page.lang | default: site.lang | default: "en" }}">
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
 
   {% include head.html %}
   <body>
@@ -10,7 +10,58 @@
         <a class="item" href="http://weibo.com/6152967474" target="_blank"><i class="weibo red icon"></i> 微博</a>
       </div>
     </div>
+    <img class="hidden ui image" src="/assets/images/qrcode_for_wechat.jpg">
     {{ content }}
+
+    <div class="ui fullscreen modal">
+      <i class="close icon"></i>
+      <div class="header">
+        礼盒
+      </div>
+      <div class="ui three top attached steps">
+        <div class="active step">
+          <i class="truck icon"></i>
+          <div class="content">
+            <div class="title">Shipping</div>
+            <div class="description">Choose your shipping options</div>
+          </div>
+        </div>
+        <div class="step">
+          <i class="payment icon"></i>
+          <div class="content">
+            <div class="title">Billing</div>
+            <div class="description">Enter billing information</div>
+          </div>
+        </div>
+        <div class="disabled step">
+          <i class="info icon"></i>
+          <div class="content">
+            <div class="title">Confirm Order</div>
+            <div class="description">Verify order details</div>
+          </div>
+        </div>
+      </div>
+      <div class="image content">
+        <div class="ui medium image">
+          <img src="/assets/images/600x600.jpg">
+        </div>
+        <div class="description">
+          <div class="ui header">We've auto-chosen a profile image for you.</div>
+          <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated with your registered e-mail address.</p>
+          <p>Is it okay to use this photo?</p>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="ui black deny button">
+          Nope
+        </div>
+        <div class="ui positive right labeled icon button">
+          Yep, that's me
+          <i class="checkmark icon"></i>
+        </div>
+      </div>
+    </div>
+
     {% include footer.html %}
   </body>
 </html>
