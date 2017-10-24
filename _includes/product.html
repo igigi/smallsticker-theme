@@ -8,7 +8,12 @@
     价格：<i class="yen icon"></i>{{ product.price }}
   </div>
 </div>
-<div class="ui bottom attached red button">
+<div class="smallsticker-add-item ui bottom attached red button"
+  data-item-name="{{ product.name }}"
+  data-item-id="{{ product.sku }}"
+  data-item-image="{{ product.image }}"
+  data-item-url="{{ site.baseurl }}"
+  data-item-price="{{ product.price }}">
   <i class="archive icon"></i>
   放入礼盒
 </div>

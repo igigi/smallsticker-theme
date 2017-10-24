@@ -57,7 +57,7 @@ layout: home
           wb_appkey = "380468695",//你的app key
           wb_title = "{{ page.title }}",
           wb_ralateUid = "6152967474",//微博id，获得你的用户名
-          wb_pic = "{{ page.banner-image | absolute_url}}",
+          wb_pic = "{{ page.image | absolute_url}}",
           wb_language = "zh_cn";
       wb_shareBtn.setAttribute("href","http://service.weibo.com/share/share.php?url="+wb_url+"&appkey="+wb_appkey+"&title="+wb_title+"&pic="+wb_pic+"&ralateUid="+wb_ralateUid+"&language="+wb_language+"");
   }

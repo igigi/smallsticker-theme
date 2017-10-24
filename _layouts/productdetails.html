@@ -26,7 +26,15 @@ head:
   <h2 class="sub header">
     <span>价格：<i class="yen icon"></i>{{ page.price }}</span>
   </h2>
-  <div> {{ content }} </div>
+  <button class="snipcart-add-item ui red button"
+    data-item-name="{{ page.name }}"
+    data-item-id="{{ page.sku }}"
+    data-item-image="{{ page.image }}"
+    data-item-url="{{ site.baseurl }}"
+    data-item-price="{{ page.price }}">
+    <i class="archive icon"></i>
+    放入礼盒
+  </button>
   <div class="ui divider" ></div>
   <a class="ui red mini button" id="shareBtn" target="_blank">
     <i class="weibo icon"></i>
@@ -36,13 +44,23 @@ head:
     <i class="wechat icon"></i>
     微信分享
   </button>
-  <button class="snipcart-add-item ui button"
-    data-item-name="{{ page.name }}"
-    data-item-id="{{ page.sku }}"
-    data-item-image="{{ page.image }}"
-    data-item-url="{{ site.baseurl }}"
-    data-item-price="{{ page.price }}">
-    Buy it for {{ page.price }} $
-  </button>
+
+  <div class="ui top attached tabular menu">
+    <a class="item active" data-tab="first">描述</a>
+    <a class="item" data-tab="second">规格</a>
+    <a class="item" data-tab="third">其他</a>
+  </div>
+  <div class="ui bottom attached tab segment active" data-tab="first">
+    {{ content }}
+  </div>
+  <div class="ui bottom attached tab segment" data-tab="second">
+    Second
+  </div>
+  <div class="ui bottom attached tab segment" data-tab="third">
+    Third
+  </div>
+
+
+
   </div>
 </div>

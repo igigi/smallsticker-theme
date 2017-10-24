@@ -6,12 +6,19 @@
     {% include header.html %}
     <div class="overlay">
       <div class="ui labeled icon vertical menu">
-        <a class="item" data-tooltip="微信号：small-sticker，或搜索“小贴画”关注" data-position="right center"><i class="wechat green icon"></i> 微信</a>
+        <a class="item wechat-box"><i class="wechat green icon"></i> 微信</a>
         <a class="item" href="http://weibo.com/6152967474" target="_blank"><i class="weibo red icon"></i> 微博</a>
       </div>
     </div>
-    <img class="hidden ui image" src="/assets/images/qrcode_for_wechat.jpg">
+
     {{ content }}
+
+    <div class="ui mini wechat-box modal">
+      <div class="header">扫码关注小贴画</div>
+      <div class="content">
+        <img class="ui centered image"src="/assets/images/qrcode_for_wechat.jpg">
+      </div>
+    </div>
 
     <div class="ui fullscreen modal">
       <i class="close icon"></i>
