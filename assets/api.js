@@ -30,7 +30,7 @@ $(document).ready(function() {
       return settings;
     },
     onSuccess: function(response) {
-      $('#gift-counter').text(Number($('#gift-counter').text()) + 1);
+      $('#gift-counter').text(Number($('#gift-counter').text()) + 1).transition('flash');
     }
   });
 });
