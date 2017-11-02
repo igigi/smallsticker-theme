@@ -18,6 +18,9 @@ $(document)
       .tab()
     ;
 
+    $('.steps .step')
+      .tab()
+    ;
     // lazy load images
     $('.image').visibility({
       type: 'image',

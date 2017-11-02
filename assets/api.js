@@ -18,7 +18,6 @@ $(document).ready(function() {
     });
   };
   // 调用添加到礼盒接口
-  var itemCounter = $('#gift-counter').text();
   $('.smallsticker-add-item').api({
     action: 'add item to cart',
     method: 'POST',
@@ -30,7 +29,15 @@ $(document).ready(function() {
       return settings;
     },
     onSuccess: function(response) {
-      $('#gift-counter').text(Number($('#gift-counter').text()) + 1).transition('flash');
+      $('#gift-counter').transition('flash').text(Number($('#gift-counter').text()) + 1);
     }
-  });
+  }).state({
+      onActivate: function() {
+        $(this).state('flash text');
+      },
+      text: {
+        active     : '<i class="plus icon"></i>放入礼盒',
+        flash      : '<i class="archive icon"></i>已放入礼盒'
+      }
+    });
 });

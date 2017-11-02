@@ -15,50 +15,96 @@
     </div>
 
     <div class="ui fullscreen modal">
-      <i class="close icon"></i>
-      <div class="header">
-        礼盒
-      </div>
-      <div class="ui three top attached steps">
-        <div class="active step">
+      <div class="ui four top attached steps">
+        <a class="active step" data-tab="1">
+          <i class="gift icon"></i>
+          <div class="content">
+            <div class="title">清单</div>
+            <div class="description">查看和修改您的礼盒清单</div>
+          </div>
+        </a>
+        <a class="step" data-tab="2">
           <i class="truck icon"></i>
           <div class="content">
-            <div class="title">Shipping</div>
-            <div class="description">Choose your shipping options</div>
+            <div class="title">配送</div>
+            <div class="description">填写配送信息</div>
           </div>
-        </div>
-        <div class="step">
+        </a>
+        <a class="step" data-tab="3">
           <i class="payment icon"></i>
           <div class="content">
-            <div class="title">Billing</div>
-            <div class="description">Enter billing information</div>
+            <div class="title">支付</div>
+            <div class="description">扫码进行支付</div>
           </div>
-        </div>
-        <div class="disabled step">
+        </a>
+        <a class="step" data-tab="4">
           <i class="info icon"></i>
           <div class="content">
-            <div class="title">Confirm Order</div>
-            <div class="description">Verify order details</div>
+            <div class="title">完成</div>
+            <div class="description">显示订单相关信息</div>
           </div>
-        </div>
+        </a>
       </div>
-      <div class="image content">
-        <div class="ui medium image">
-          <img src="/assets/images/600x600.jpg">
-        </div>
-        <div class="description">
-          <div class="ui header">We've auto-chosen a profile image for you.</div>
-          <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated with your registered e-mail address.</p>
-          <p>Is it okay to use this photo?</p>
-        </div>
+      <div class="ui tab attached segment active" data-tab="1">
+        <table class="ui padded striped table">
+          <thead>
+            <tr>
+            <th></th>
+            <th>产品信息</th>
+            <th>价格</th>
+            <th>数量</th>
+            <th>小计</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><button class="ui icon button"><i class="remove icon"></i></button></td>
+              <td><button class="ui icon button"><i class="remove icon"></i></button></td>
+              <td>Cell</td>
+              <td>Cell</td>
+              <td>Cell</td>
+            </tr>
+            <tr>
+              <td><button class="ui icon button"><i class="remove icon"></i></button></td>
+              <td><button class="ui icon button"><i class="remove icon"></i></button></td>
+              <td>Cell</td>
+              <td>Cell</td>
+              <td>Cell</td>
+            </tr>
+            <tr>
+              <td><button class="ui icon button"><i class="remove icon"></i></button></td>
+              <td>Cell</td>
+              <td>Cell</td>
+              <td>Cell</td>
+              <td>Cell</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th colspan="5">
+                总计：
+              </th>
+            </tr>
+          </tfoot>
+        </table>
+
+
+
+
+      </div>
+      <div class=" ui tab attached segment" data-tab="2">
+aaaaaaaaaaaaaa
+      </div>
+      <div class=" ui tab attached segment" data-tab="3">
+bbbbbbbbb
+      </div>
+      <div class=" ui tab attached segment" data-tab="4">
+ccccccccc
       </div>
       <div class="actions">
-        <div class="ui black deny button">
-          Nope
-        </div>
         <div class="ui positive right labeled icon button">
-          Yep, that's me
-          <i class="checkmark icon"></i>
+          先关闭，我再看看
+          <i class="close icon"></i>
         </div>
       </div>
     </div>
