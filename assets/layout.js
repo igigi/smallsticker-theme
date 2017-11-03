@@ -10,10 +10,6 @@ $(document)
       $('.mini.wechat-box.modal').modal('show');
     });
 
-    $('.gift-box').click(function(){
-      $('.fullscreen.modal').modal('show');
-    });
-
     $('.menu .item')
       .tab()
     ;

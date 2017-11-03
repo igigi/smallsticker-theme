@@ -40,4 +40,23 @@ $(document).ready(function() {
         flash      : '<i class="archive icon"></i>已放入礼盒'
       }
     });
+
+    // 礼盒清单接口
+    $('.gift-box').click(function(){
+      $('.fullscreen.modal').modal({
+        onShow :  function() {
+          $.getJSON('http://localhost:3000/carts/1/items', function(data) {
+            $.each(data.data, function(item) {
+              console.log(item.attributes);
+              $('tbody').append('<tr><td><button class="ui icon button"><i class="remove icon"></i></button></td>' +
+              '<td>' + item.attributes.product_name + '</td>' +
+              '<td>' + item.attributes.product_price + '</td>' +
+              '<td>' + item.attributes.quantity + '</td>' +
+              '<td>' + item.attributes.total_price + '</td>' +
+              '</tr>');
+            });
+          });
+        },
+      }).modal('show');
+    });
 });
