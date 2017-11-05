@@ -13,7 +13,7 @@ $(document).ready(function() {
   } else {
     $.post('http://localhost:3000/carts', function(data) {
       sessionStorage.setItem('cart_id', data.data.id);
-      cartId = sessionStorage.getItem('cart_id');
+      cartId = sessionStorage.setItem('cart_id');
       $('#gift-counter').text(data.data.attributes.items_count);
     });
   };
