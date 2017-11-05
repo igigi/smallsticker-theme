@@ -40,17 +40,18 @@ $(document).ready(function() {
         flash      : '<i class="archive icon"></i>已放入礼盒'
       }
     });
-
     // 礼盒清单接口
     $('.gift-box').click(function(){
-      if ($('#gift-counter').text() == 0) {
+      var giftCounter = $('#gift-counter').text();
+      if (giftCounter == 0) {
         $('.standart.modal').modal('show');
+      } else if (giftCounter == '等我一下') {
+        $('.waite.modal').modal('show');
       } else {
         $('.fullscreen.modal').modal({
           onShow :  function() {
             $.getJSON('http://localhost:3000/carts/' + cartId + '/items', function(data) {
               if (data.data.length == 0) {
-
               } else {
                 $.each(data.data, function(i, item) {
                   $('tbody').append('<tr><td><button class="ui icon button"><i class="remove icon"></i></button></td>' +
