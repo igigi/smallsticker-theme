@@ -43,20 +43,31 @@ $(document).ready(function() {
 
     // 礼盒清单接口
     $('.gift-box').click(function(){
-      $('.fullscreen.modal').modal({
-        onShow :  function() {
-          $.getJSON('http://localhost:3000/carts/1/items', function(data) {
-            $.each(data.data, function(item) {
-              console.log(item.attributes);
-              $('tbody').append('<tr><td><button class="ui icon button"><i class="remove icon"></i></button></td>' +
-              '<td>' + item.attributes.product_name + '</td>' +
-              '<td>' + item.attributes.product_price + '</td>' +
-              '<td>' + item.attributes.quantity + '</td>' +
-              '<td>' + item.attributes.total_price + '</td>' +
-              '</tr>');
+      if ($('#gift-counter').text() == 0) {
+        $('.standart.modal').modal('show');
+      } else {
+        $('.fullscreen.modal').modal({
+          onShow :  function() {
+            $.getJSON('http://localhost:3000/carts/' + cartId + '/items', function(data) {
+              if (data.data.length == 0) {
+
+              } else {
+                $.each(data.data, function(i, item) {
+                  $('tbody').append('<tr><td><button class="ui icon button"><i class="remove icon"></i></button></td>' +
+                  '<td>' + item.attributes.product_name + '</td>' +
+                  '<td>' + item.attributes.product_price + '</td>' +
+                  '<td>' + item.attributes.quantity + '</td>' +
+                  '<td>' + item.attributes.total_price + '</td>' +
+                  '</tr>');
+                });
+                $('#total-price').text(data.meta.cart_total_price);
+              }
             });
-          });
-        },
-      }).modal('show');
+          },
+          onHidden : function() {
+            $('tbody tr').remove();
+          }
+        }).modal('show');
+      };
     });
 });

@@ -14,6 +14,23 @@
         <img class="ui centered image content"src="/assets/images/qrcode_for_wechat.jpg">
     </div>
 
+    <div class="ui standart modal">
+      <div class="header">
+        礼盒清单
+      </div>
+      <div class="content">
+        <div class="description">
+          <div class="ui header">礼盒还空着呢，快去选喜欢的礼物吧</div>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="ui positive right labeled icon button">
+          好的
+        <i class="close icon"></i>
+        </div>
+      </div>
+    </div>
+
     <div class="ui fullscreen modal">
       <div class="ui four top attached steps">
         <a class="active step" data-tab="1">
@@ -45,8 +62,8 @@
           </div>
         </a>
       </div>
-      <div class="ui tab attached segment active" data-tab="1">
-        <table class="ui padded striped table">
+      <div class="tab attached segment active" data-tab="1">
+        <table class="ui padded structured table">
           <thead>
             <tr>
             <th></th>
@@ -56,28 +73,23 @@
             <th>小计</th>
             </tr>
           </thead>
-          <tbody id="cart-item">
-            <tr>
-              <td><button class="ui icon button"><i class="remove icon"></i></button></td>
-              <td><button class="ui icon button"><i class="remove icon"></i></button></td>
-              <td>Cell</td>
-              <td>Cell</td>
-              <td>Cell</td>
-            </tr>
+          <tbody>
 
           </tbody>
           <tfoot>
+            <div class="ui hidden message">
+              <p>礼盒还空着呢，快去选喜欢的礼物吧</p>
+            </div>
             <tr>
-              <th colspan="5">
-                总计：
+              <th colspan="4">
+                运费：<i class="yen icon"></i>10
+              </th>
+              <th colspan="1">
+                总计：<i class="yen icon"></i><span id="total-price">0</span>
               </th>
             </tr>
           </tfoot>
         </table>
-
-
-
-
       </div>
       <div class=" ui tab attached segment" data-tab="2">
 aaaaaaaaaaaaaa
@@ -90,8 +102,8 @@ ccccccccc
       </div>
       <div class="actions">
         <div class="ui positive right labeled icon button">
-          先关闭，我再看看
-          <i class="close icon"></i>
+          下一步
+          <i class="arrow right icon"></i>
         </div>
       </div>
     </div>
