@@ -41,6 +41,24 @@ $(document).ready(function() {
       }
     });
     // 礼盒清单接口
+    function giftBoxModify () {
+      $.getJSON('http://localhost:3000/carts/' + cartId + '/items', function(data) {
+        if (data.data.length == 0) {
+        } else {
+          $.each(data.data, function(i, item) {
+            $('tbody').append('<tr><td><button class="circular ui icon button remove-item"><i class="remove icon"></i></button></td>' +
+            '<td>' + item.attributes.product_name + '</td>' +
+            '<td>' + item.attributes.product_price + '</td>' +
+            '<td>' + '<button class="circular ui icon button plus-item"><i class="icon plus"></i></button>' +
+            item.attributes.quantity +
+            '<button class="circular ui icon button minus-item"><i class="icon minus"></i></button>' + '</td>' +
+            '<td>' + item.attributes.total_price + '</td>' +
+            '</tr>');
+          });
+          $('#total-price').text(data.meta.cart_total_price);
+        }
+      });
+    };
     $('.gift-box').click(function(){
       var giftCounter = $('#gift-counter').text();
       if (giftCounter == 0) {
@@ -50,20 +68,7 @@ $(document).ready(function() {
       } else {
         $('.fullscreen.modal').modal({
           onShow :  function() {
-            $.getJSON('http://localhost:3000/carts/' + cartId + '/items', function(data) {
-              if (data.data.length == 0) {
-              } else {
-                $.each(data.data, function(i, item) {
-                  $('tbody').append('<tr><td><button class="ui icon button"><i class="remove icon"></i></button></td>' +
-                  '<td>' + item.attributes.product_name + '</td>' +
-                  '<td>' + item.attributes.product_price + '</td>' +
-                  '<td>' + item.attributes.quantity + '</td>' +
-                  '<td>' + item.attributes.total_price + '</td>' +
-                  '</tr>');
-                });
-                $('#total-price').text(data.meta.cart_total_price);
-              }
-            });
+            giftBoxModify();
           },
           onHidden : function() {
             $('tbody tr').remove();
@@ -71,4 +76,7 @@ $(document).ready(function() {
         }).modal('show');
       };
     });
+
+    // 礼盒清单修改数量
+    $('.plus-item').click(giftBoxModify());
 });
