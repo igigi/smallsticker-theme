@@ -70,13 +70,16 @@ $(document).ready(function() {
           onShow :  function() {
             giftBoxModify();
           },
+          onVisible : function() {
+            // 礼盒清单修改数量
+            $('.plus-item').click(function() {
+              giftBoxModify();
+            });
+          },
           onHidden : function() {
             $('tbody tr').remove();
           }
         }).modal('show');
       };
     });
-
-    // 礼盒清单修改数量
-    $('.plus-item').click(giftBoxModify());
 });
