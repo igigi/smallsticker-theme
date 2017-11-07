@@ -48,12 +48,29 @@ $(document).ready(function() {
           $.each(data.data, function(i, item) {
             $('tbody').append('<tr><td><button class="circular ui icon button remove-item"><i class="remove icon"></i></button></td>' +
             '<td>' + item.attributes.product_name + '</td>' +
-            '<td>' + item.attributes.product_price + '</td>' +
-            '<td>' + '<button class="circular ui icon button plus-item"><i class="icon plus"></i></button>' +
-            item.attributes.quantity +
+            '<td ' + 'id=price-' + item.id + '>' + item.attributes.product_price + '</td>' +
+            '<td>' + '<button class="circular ui icon button plus-item"' + 'id=' + item.id + '><i class="icon plus"></i></button>' +
+            '<span '+ 'id=quantity-' + item.id + '>' + item.attributes.quantity + '</span>' +
             '<button class="circular ui icon button minus-item"><i class="icon minus"></i></button>' + '</td>' +
-            '<td>' + item.attributes.total_price + '</td>' +
+            '<td ' + 'id=total-price-' + item.id + '>'  + item.attributes.total_price + '</td>' +
             '</tr>');
+
+            $('#' + item.id).click(function() {
+              var quantity = Number($('#quantity-' + item.id).text()) + 1
+              var price = Number($('#price-' + item.id).text())
+              var totalPrice = Number($('#total-price-' + item.id).text())
+              var allTotalPrice= Number($('#total-price').text());
+              $.ajax({
+                method: "PUT",
+                url: "http://localhost:3000/carts/" + cartId + '/items/' + item.id,
+                data: { quantity: quantity }
+              })
+                .done(function() {
+                  $('#quantity-' + item.id).text(quantity);
+                  $('#total-price-' + item.id).text(totalPrice + price);
+                  $('#total-price').text(allTotalPrice + price)
+                });
+            });
           });
           $('#total-price').text(data.meta.cart_total_price);
         }
@@ -72,9 +89,7 @@ $(document).ready(function() {
           },
           onVisible : function() {
             // 礼盒清单修改数量
-            $('.plus-item').click(function() {
-              giftBoxModify();
-            });
+
           },
           onHidden : function() {
             $('tbody tr').remove();
