@@ -46,16 +46,16 @@ $(document).ready(function() {
         if (data.data.length == 0) {
         } else {
           $.each(data.data, function(i, item) {
-            $('tbody').append('<tr><td><button class="circular ui icon button remove-item"><i class="remove icon"></i></button></td>' +
+            $('tbody').append('<tr '  + 'id=' + item.id + '><td><button class="circular ui icon button remove-item"' + 'id=' + item.id + '><i class="remove icon"></i></button></td>' +
             '<td>' + item.attributes.product_name + '</td>' +
             '<td ' + 'id=price-' + item.id + '>' + item.attributes.product_price + '</td>' +
             '<td>' + '<button class="circular ui icon button plus-item"' + 'id=' + item.id + '><i class="icon plus"></i></button>' +
             '<span '+ 'id=quantity-' + item.id + '>' + item.attributes.quantity + '</span>' +
-            '<button class="circular ui icon button minus-item"><i class="icon minus"></i></button>' + '</td>' +
+            '<button class="circular ui icon button minus-item"' + 'id=' + item.id + '><i class="icon minus"></i></button>' + '</td>' +
             '<td ' + 'id=total-price-' + item.id + '>'  + item.attributes.total_price + '</td>' +
             '</tr>');
 
-            $('#' + item.id).click(function() {
+            $('#' + item.id + '.plus-item').click(function() {
               var quantity = Number($('#quantity-' + item.id).text()) + 1
               var price = Number($('#price-' + item.id).text())
               var totalPrice = Number($('#total-price-' + item.id).text())
@@ -71,6 +71,34 @@ $(document).ready(function() {
                   $('#total-price').text(allTotalPrice + price)
                 });
             });
+
+            $('#' + item.id + '.minus-item').click(function() {
+              var quantity = Number($('#quantity-' + item.id).text()) - 1
+              var price = Number($('#price-' + item.id).text())
+              var totalPrice = Number($('#total-price-' + item.id).text())
+              var allTotalPrice= Number($('#total-price').text());
+              $.ajax({
+                method: "PUT",
+                url: "http://localhost:3000/carts/" + cartId + '/items/' + item.id,
+                data: { quantity: quantity }
+              })
+                .done(function() {
+                  $('#quantity-' + item.id).text(quantity);
+                  $('#total-price-' + item.id).text(totalPrice - price);
+                  $('#total-price').text(allTotalPrice - price)
+                });
+            });
+
+            $('#' + item.id +'.remove-item').click(function() {
+              $.ajax({
+                method: "DELETE",
+                url: "http://localhost:3000/carts/" + cartId + '/items/' + item.id,
+              })
+                .done(function() {
+                  $('tr#' + item.id).remove();
+                })
+            });
+
           });
           $('#total-price').text(data.meta.cart_total_price);
         }
