@@ -4,7 +4,7 @@ $.fn.api.settings.api = {
   'add item to cart' : 'http://localhost:3000/carts/{cart_id}/items'
 };
 var cartId = sessionStorage.getItem('cart_id');
-$(document).ready(function() {
+function getGiftCounter(cartId) {
   // 调用礼盒数量接口
   if (cartId) {
     $.get('http://localhost:3000/carts/' + cartId, function(data) {
@@ -17,6 +17,9 @@ $(document).ready(function() {
       $('#gift-counter').text(data.data.attributes.items_count);
     });
   };
+};
+$(document).ready(function() {
+  getGiftCounter(cartId);
   // 调用添加到礼盒接口
   $('.smallsticker-add-item').api({
     action: 'add item to cart',
@@ -54,48 +57,59 @@ $(document).ready(function() {
             '<button class="circular ui icon button minus-item"' + 'id=' + item.id + '><i class="icon minus"></i></button>' + '</td>' +
             '<td ' + 'id=total-price-' + item.id + '>'  + item.attributes.total_price + '</td>' +
             '</tr>');
+            var price = Number($('#price-' + item.id).text())
 
             $('#' + item.id + '.plus-item').click(function() {
               var quantity = Number($('#quantity-' + item.id).text()) + 1
-              var price = Number($('#price-' + item.id).text())
               var totalPrice = Number($('#total-price-' + item.id).text())
               var allTotalPrice= Number($('#total-price').text());
-              $.ajax({
-                method: "PUT",
-                url: "http://localhost:3000/carts/" + cartId + '/items/' + item.id,
-                data: { quantity: quantity }
-              })
-                .done(function() {
-                  $('#quantity-' + item.id).text(quantity);
-                  $('#total-price-' + item.id).text(totalPrice + price);
-                  $('#total-price').text(allTotalPrice + price)
-                });
+              if (quantity > 1) {
+                $.ajax({
+                  method: "PUT",
+                  url: "http://localhost:3000/carts/" + cartId + '/items/' + item.id,
+                  data: { quantity: quantity }
+                })
+                  .done(function() {
+                    $('#quantity-' + item.id).text(quantity);
+                    $('#total-price-' + item.id).text(totalPrice + price);
+                    $('#total-price').text(allTotalPrice + price);
+                  });
+                };
             });
 
             $('#' + item.id + '.minus-item').click(function() {
               var quantity = Number($('#quantity-' + item.id).text()) - 1
-              var price = Number($('#price-' + item.id).text())
               var totalPrice = Number($('#total-price-' + item.id).text())
               var allTotalPrice= Number($('#total-price').text());
-              $.ajax({
-                method: "PUT",
-                url: "http://localhost:3000/carts/" + cartId + '/items/' + item.id,
-                data: { quantity: quantity }
-              })
-                .done(function() {
-                  $('#quantity-' + item.id).text(quantity);
-                  $('#total-price-' + item.id).text(totalPrice - price);
-                  $('#total-price').text(allTotalPrice - price)
-                });
+              if (quantity > 0) {
+                $.ajax({
+                  method: "PUT",
+                  url: "http://localhost:3000/carts/" + cartId + '/items/' + item.id,
+                  data: { quantity: quantity }
+                })
+                  .done(function() {
+                    $('#quantity-' + item.id).text(quantity);
+                    $('#total-price-' + item.id).text(totalPrice - price);
+                    $('#total-price').text(allTotalPrice - price);
+                  });
+                };
             });
 
             $('#' + item.id +'.remove-item').click(function() {
+              var totalPrice = Number($('#total-price-' + item.id).text())
+              var allTotalPrice= Number($('#total-price').text());
               $.ajax({
                 method: "DELETE",
                 url: "http://localhost:3000/carts/" + cartId + '/items/' + item.id,
               })
                 .done(function() {
                   $('tr#' + item.id).remove();
+                  if (allTotalPrice == totalPrice) {
+                    $('.standart.modal').modal('show');
+                    getGiftCounter(cartId);
+                  } else {
+                    $('#total-price').text(allTotalPrice - totalPrice);
+                  }
                 })
             });
 
@@ -116,11 +130,12 @@ $(document).ready(function() {
             giftBoxModify();
           },
           onVisible : function() {
-            // 礼盒清单修改数量
+
 
           },
           onHidden : function() {
             $('tbody tr').remove();
+            getGiftCounter(cartId);
           }
         }).modal('show');
       };
