@@ -1,7 +1,8 @@
 $.fn.api.settings.api = {
   'create cart' : 'http://localhost:3000/carts',
   'show cart'   : 'http://localhost:3000/carts/{cart_id}',
-  'add item to cart' : 'http://localhost:3000/carts/{cart_id}/items'
+  'add item to cart' : 'http://localhost:3000/carts/{cart_id}/items',
+  'submit order info' : 'http://localhost:3000/orders'
 };
 var cartId = sessionStorage.getItem('cart_id');
 function getGiftCounter(cartId) {
@@ -130,8 +131,37 @@ $(document).ready(function() {
             giftBoxModify();
           },
           onVisible : function() {
-
-
+            $('.gift-box-1').click(function() {
+              $('a[data-tab = "1"]').removeClass('active');
+              $('div[data-tab = "1"]').removeClass('active');
+              $('a[data-tab = "2"]').addClass('active');
+              $('div[data-tab = "2"]').addClass('active');
+            });
+            $('.gift-box-2-backward').click(function() {
+              $('a[data-tab = "2"]').removeClass('active');
+              $('div[data-tab = "2"]').removeClass('active');
+              $('a[data-tab = "1"]').addClass('active');
+              $('div[data-tab = "1"]').addClass('active');
+            });
+            $('.gift-box-2-forward').click(function() {
+              $('a[data-tab = "2"]').removeClass('active');
+              $('div[data-tab = "2"]').removeClass('active');
+              $('a[data-tab = "3"]').addClass('active');
+              $('div[data-tab = "3"]').addClass('active');
+            });
+            $('.gift-box-3-backward').click(function() {
+              $('a[data-tab = "3"]').removeClass('active');
+              $('div[data-tab = "3"]').removeClass('active');
+              $('a[data-tab = "2"]').addClass('active');
+              $('div[data-tab = "2"]').addClass('active');
+            });
+            $('.gift-box-3-forward').click(function() {
+              $('a[data-tab = "3"]').removeClass('active');
+              $('div[data-tab = "3"]').removeClass('active');
+              $('a[data-tab = "4"]').addClass('active');
+              $('div[data-tab = "4"]').addClass('active');
+              $('a[data-tab = "3"]').addClass('disabled');
+            });
           },
           onHidden : function() {
             $('tbody tr').remove();
@@ -140,4 +170,48 @@ $(document).ready(function() {
         }).modal('show');
       };
     });
+    // 提交配送信息
+    $('.ui.form')
+      .form({
+        fields: {
+          name: {
+            identifier: 'name',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : '请填写姓名'
+              }
+            ]
+          },
+          phone: {
+            identifier: 'phone',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : '请填写联系电话'
+              }
+            ]
+          },
+          address: {
+            identifier: 'address',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : '请填写完整地址'
+              }
+            ]
+          }
+        }
+      });
+      if ($('.ui.form').form('is valide')) {
+        $('.gift-box-2-forward').removeClass('disabled');
+        $('form .gift-box-2-forward')
+          .api({
+            action: 'submit order info',
+            method: 'POST',
+            serializeForm: true
+          });
+      }
+
+
 });
