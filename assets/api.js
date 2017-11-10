@@ -162,6 +162,53 @@ $(document).ready(function() {
               $('div[data-tab = "4"]').addClass('active');
               $('a[data-tab = "3"]').addClass('disabled');
             });
+            // 提交配送信息
+            $('.input')
+              .form({
+                inline : true,
+                on     : 'blur',
+                onSuccess : function() {
+                  $('.gift-box-2-forward').removeClass('disabled');
+                },
+                fields: {
+                  name: {
+                    identifier: 'name',
+                    rules: [
+                      {
+                        type   : 'empty',
+                        prompt : '请填写姓名'
+                      }
+                    ]
+                  },
+                  phone: {
+                    identifier: 'phone',
+                    rules: [
+                      {
+                        type   : 'empty',
+                        prompt : '请填写联系电话'
+                      }
+                    ]
+                  },
+                  address: {
+                    identifier: 'address',
+                    rules: [
+                      {
+                        type   : 'empty',
+                        prompt : '请填写完整地址'
+                      }
+                    ]
+                  }
+                }
+              });
+              // $( ".input" )
+              // .api({
+              //   action: 'submit order info',
+              //   method: 'POST',
+              //   serializeForm: true,
+              //   onSuccess : function() {
+              //     $('.gift-box-2-forward').removeClass('disabled');
+              //   }
+              // });
           },
           onHidden : function() {
             $('tbody tr').remove();
@@ -170,48 +217,7 @@ $(document).ready(function() {
         }).modal('show');
       };
     });
-    // 提交配送信息
-    $('.ui.form')
-      .form({
-        fields: {
-          name: {
-            identifier: 'name',
-            rules: [
-              {
-                type   : 'empty',
-                prompt : '请填写姓名'
-              }
-            ]
-          },
-          phone: {
-            identifier: 'phone',
-            rules: [
-              {
-                type   : 'empty',
-                prompt : '请填写联系电话'
-              }
-            ]
-          },
-          address: {
-            identifier: 'address',
-            rules: [
-              {
-                type   : 'empty',
-                prompt : '请填写完整地址'
-              }
-            ]
-          }
-        }
-      });
-      if (false) {
-        $('.gift-box-2-forward').removeClass('disabled');
-        $('form .gift-box-2-forward')
-          .api({
-            action: 'submit order info',
-            method: 'POST',
-            serializeForm: true
-          });
-      }
+
 
 
 });
