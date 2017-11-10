@@ -203,7 +203,7 @@ $(document).ready(function() {
           }
         }
       });
-      if ($('.ui.form').form('is valide')) {
+      if (false) {
         $('.gift-box-2-forward').removeClass('disabled');
         $('form .gift-box-2-forward')
           .api({
