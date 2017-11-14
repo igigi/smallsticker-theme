@@ -17,6 +17,10 @@ $(document)
     $('.steps .step')
       .tab()
     ;
+
+    $('.ui.radio.checkbox')
+      .checkbox()
+    ;
     // lazy load images
     $('.image').visibility({
       type: 'image',

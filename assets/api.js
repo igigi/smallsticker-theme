@@ -163,13 +163,10 @@ $(document).ready(function() {
               $('a[data-tab = "3"]').addClass('disabled');
             });
             // 提交配送信息
-            $('.input')
+            $('.logistics')
               .form({
                 inline : true,
                 on     : 'blur',
-                onSuccess : function() {
-                  $('.gift-box-2-forward').removeClass('disabled');
-                },
                 fields: {
                   name: {
                     identifier: 'name',
@@ -200,15 +197,17 @@ $(document).ready(function() {
                   }
                 }
               });
-              // $( ".input" )
-              // .api({
-              //   action: 'submit order info',
-              //   method: 'POST',
-              //   serializeForm: true,
-              //   onSuccess : function() {
-              //     $('.gift-box-2-forward').removeClass('disabled');
-              //   }
-              // });
+              $( ".logistics" ).on( "submit", function( event ) {
+                event.preventDefault();
+              })
+              .api({
+                action: 'submit order info',
+                method: 'POST',
+                serializeForm: true,
+                onSuccess : function() {
+                  $('.gift-box-2-forward').removeClass('disabled');
+                }
+              });
           },
           onHidden : function() {
             $('tbody tr').remove();

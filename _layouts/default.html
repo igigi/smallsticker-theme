@@ -98,10 +98,14 @@
             </tr>
           </tfoot>
         </table>
-        <div class="ui bottom attached black button gift-box-1" tabindex="0">下一步</div>
+        <div class="ui one item  menu">
+          <div class="item">
+            <div class="ui button black gift-box-1">下一步</div>
+          </div>
+        </div>
       </div>
       <div class=" ui tab attached segment" data-tab="2">
-        <form class="ui form">
+        <form class="ui form logistics">
           <div class="two fields">
             <div class="required field">
               <label>姓名</label>
@@ -112,26 +116,57 @@
               <input type="text" name="phone" placeholder="手机号或者座机电话">
             </div>
           </div>
-          <div class="required field input">
+          <div class="required field">
             <label>收货地址</label>
             <textarea rows="2" name="address" class="address"></textarea>
           </div>
-
-          <div class="ui two bottom attached black buttons">
-              <div class="ui button gift-box-2-backward">上一步</div>
-              <div class="ui button gift-box-2-forward disabled">下一步</div>
-          </div>
+          <div class="ui bottom black submit attached button" tabindex="0">提交</div>
         </form>
+        <div class="ui two item  menu">
+          <div class="item">
+            <div class="ui button black gift-box-2-backward">上一步</div>
+          </div>
+          <div class="item">
+            <div class="ui button black gift-box-2-forward disabled">下一步</div>
+          </div>
+        </div>
+
       </div>
       <div class=" ui tab attached segment" data-tab="3">
-        bbbbbbbbb
-        <div class="ui two bottom attached black buttons">
-            <div class="ui button gift-box-3-backward">上一步</div>
-            <div class="ui button gift-box-3-forward disabled">下一步</div>
+        <div class="ui form">
+          <div class="inline fields">
+            <label for="fruit">选择您的支付方式：</label>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input type="radio" name="pay-method" checked="" tabindex="0" class="hidden">
+                <label>支付宝</label>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input type="radio" name="pay-method" tabindex="0" class="hidden">
+                <label>微信</label>
+              </div>
+            </div>
+          </div>
+          <img class="ui small centered bordered image" src="http://localhost:4000/assets/images/wireframe/image.png">
+        </div>
+        <div class="ui two item  menu">
+          <div class="item">
+            <div class="ui button black gift-box-3-backward">上一步</div>
+          </div>
+          <div class="item">
+            <div class="ui button black gift-box-3-forward disabled">下一步</div>
+          </div>
         </div>
       </div>
-      <div class=" ui tab attached segment" data-tab="4">
-        ccccccccc
+      <div class="ui tab attached segment" data-tab="4">
+        <div class="ui message">
+          <div class="header">
+            订单完成
+          </div>
+          <p>我们会把订单的最新信息第一时间短信通知您，感谢您的购买</p>
+        </div>
       </div>
       <div class="actions">
         <div class="ui positive right labeled icon button">
