@@ -2,7 +2,9 @@ $.fn.api.settings.api = {
   'create cart' : 'http://localhost:3000/carts',
   'show cart'   : 'http://localhost:3000/carts/{cart_id}',
   'add item to cart' : 'http://localhost:3000/carts/{cart_id}/items',
-  'submit order info' : 'http://localhost:3000/orders'
+  'submit order info' : 'http://localhost:3000/carts/{cart_id}/orders',
+  'get alipay qrcode' : 'http://localhost:3000/carts/{cart_id}/orders/alipay',
+  'get wxpay qrcode' : 'http://localhost:3000/carts/{cart_id}/orders/wxpay',
 };
 var cartId = sessionStorage.getItem('cart_id');
 function getGiftCounter(cartId) {
@@ -119,6 +121,16 @@ $(document).ready(function() {
         }
       });
     };
+    // 写二维码图片到网页上
+    function writeQrcode(msg) {
+      var typeNumber = 4;
+      var errorCorrectionLevel = 'L';
+      var qr = qrcode(typeNumber, errorCorrectionLevel);
+      qr.addData(msg);
+      qr.make();
+      document.getElementById('placeHolder').innerHTML = qr.createImgTag();
+    };
+
     $('.gift-box').click(function(){
       var giftCounter = $('#gift-counter').text();
       if (giftCounter == 0) {
@@ -147,6 +159,7 @@ $(document).ready(function() {
               $('a[data-tab = "2"]').removeClass('active');
               $('div[data-tab = "2"]').removeClass('active');
               $('a[data-tab = "3"]').addClass('active');
+              $('a[data-tab = "3"]').removeClass('disabled');
               $('div[data-tab = "3"]').addClass('active');
             });
             $('.gift-box-3-backward').click(function() {
@@ -204,8 +217,37 @@ $(document).ready(function() {
                 action: 'submit order info',
                 method: 'POST',
                 serializeForm: true,
+                urlData: {
+                  cart_id: cartId
+                },
                 onSuccess : function() {
                   $('.gift-box-2-forward').removeClass('disabled');
+                }
+              });
+
+              $('.alipay')
+              .api({
+                action: 'get alipay qrcode',
+                method: 'POST',
+                urlData: {
+                  cart_id: cartId
+                },
+                onSuccess : function(response) {
+                  var msg = '';
+                  writeQrcode(msg);
+                }
+              });
+
+              $('.wxpay')
+              .api({
+                action: 'get wxpay qrcode',
+                method: 'POST',
+                urlData: {
+                  cart_id: cartId
+                },
+                onSuccess : function(response) {
+                  var msg = '';
+                  writeQrcode(msg);
                 }
               });
           },
