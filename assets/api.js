@@ -128,7 +128,7 @@ $(document).ready(function() {
       var qr = qrcode(typeNumber, errorCorrectionLevel);
       qr.addData(msg);
       qr.make();
-      document.getElementById('placeHolder').innerHTML = qr.createImgTag();
+      document.getElementById('placeHolder').innerHTML = qr.createImgTag(4);
     };
 
     $('.gift-box').click(function(){
@@ -233,7 +233,7 @@ $(document).ready(function() {
                   cart_id: cartId
                 },
                 onSuccess : function(response) {
-                  var msg = '';
+                  var msg = response.qrcode_url;
                   writeQrcode(msg);
                 }
               });
@@ -246,7 +246,7 @@ $(document).ready(function() {
                   cart_id: cartId
                 },
                 onSuccess : function(response) {
-                  var msg = '';
+                  var msg = response.qrcode_url;
                   writeQrcode(msg);
                 }
               });
