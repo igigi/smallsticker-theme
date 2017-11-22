@@ -234,7 +234,7 @@ $(document).ready(function() {
                 },
                 onSuccess : function(response) {
                   var msg = response.qrcode_url;
-                  writeQrcode(msg);
+                  document.getElementById('placeHolder').innerHTML = '<iframe src=' + msg + ' title="二维码" frameborder="0" scrolling="no" width="164" height="164"></iframe>'
                 }
               });
 
