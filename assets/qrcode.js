@@ -2058,7 +2058,7 @@ var qrcode = function() {
     base64.flush();
 
     var img = '';
-    img += '<img class="ui small centered bordered image"';
+    img += '<img class="ui small centered image"';
     img += '\u0020src="';
     img += 'data:image/gif;base64,';
     img += base64;

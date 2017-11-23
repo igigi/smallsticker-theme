@@ -130,6 +130,31 @@ $(document).ready(function() {
       qr.make();
       document.getElementById('placeHolder').innerHTML = qr.createImgTag(4);
     };
+    // 获取订单支付状态
+    function getTradeStatus(cart_id) {
+      $.ajax({
+          url: "/carts/" + cart_id + "orders/order_status",
+          type: "GET",
+          dataType:"json",
+          data: "",
+          success: function (data) {
+            if (data.trade_status == 1) {
+              $('.gift-box-3-forward').click(function() {
+                $('a[data-tab = "3"]').removeClass('active');
+                $('div[data-tab = "3"]').removeClass('active');
+                $('a[data-tab = "4"]').addClass('active');
+                $('div[data-tab = "4"]').addClass('active');
+                $('a[data-tab = "3"]').addClass('disabled');
+              });
+            } else if (data.trade_status == 2) {
+              alert("订单异常，请联系客服");
+            }
+          },
+          error: function () {
+             alert("请求订单状态出错");
+          }
+      });
+  	}
 
     $('.gift-box').click(function(){
       var giftCounter = $('#gift-counter').text();
@@ -234,7 +259,8 @@ $(document).ready(function() {
                 },
                 onSuccess : function(response) {
                   var msg = response.qrcode_url;
-                  document.getElementById('placeHolder').innerHTML = '<iframe src=' + msg + ' title="二维码" frameborder="0" scrolling="no" width="164" height="164"></iframe>'
+                  document.getElementById('placeHolder').innerHTML = '<iframe src=' + msg + ' title="二维码" frameborder="0" scrolling="no" width="150" height="150"></iframe>'
+                  setInterval("getTradeStatus(cartId)", 3000);
                 }
               });
 
@@ -248,6 +274,7 @@ $(document).ready(function() {
                 onSuccess : function(response) {
                   var msg = response.qrcode_url;
                   writeQrcode(msg);
+                  setInterval("getTradeStatus(cartId)", 3000);
                 }
               });
           },
