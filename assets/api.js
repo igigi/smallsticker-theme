@@ -1,20 +1,21 @@
+const apiAddress = 'http://localhost:3000'
 $.fn.api.settings.api = {
-  'create cart' : 'http://localhost:3000/carts',
-  'show cart'   : 'http://localhost:3000/carts/{cart_id}',
-  'add item to cart' : 'http://localhost:3000/carts/{cart_id}/items',
-  'submit order info' : 'http://localhost:3000/carts/{cart_id}/orders',
-  'get alipay qrcode' : 'http://localhost:3000/carts/{cart_id}/orders/alipay',
-  'get wxpay qrcode' : 'http://localhost:3000/carts/{cart_id}/orders/wxpay',
+  'create cart' : apiAddress + '/carts',
+  'show cart'   : apiAddress + '/carts/{cart_id}',
+  'add item to cart' : apiAddress + '/carts/{cart_id}/items',
+  'submit order info' : apiAddress + '/carts/{cart_id}/orders',
+  'get alipay qrcode' : apiAddress + '/carts/{cart_id}/orders/alipay',
+  'get wxpay qrcode' : apiAddress + '/carts/{cart_id}/orders/wxpay',
 };
 var cartId = sessionStorage.getItem('cart_id');
 function getGiftCounter(cartId) {
   // 调用礼盒数量接口
   if (cartId) {
-    $.get('http://localhost:3000/carts/' + cartId, function(data) {
+    $.get(apiAddress + '/carts/' + cartId, function(data) {
       $('#gift-counter').text(data.data.attributes.items_count);
     });
   } else {
-    $.post('http://localhost:3000/carts', function(data) {
+    $.post(apiAddress + '/carts', function(data) {
       sessionStorage.setItem('cart_id', data.data.id);
       cartId = sessionStorage.setItem('cart_id');
       $('#gift-counter').text(data.data.attributes.items_count);
@@ -48,7 +49,7 @@ $(document).ready(function() {
     });
     // 礼盒清单接口
     function giftBoxModify () {
-      $.getJSON('http://localhost:3000/carts/' + cartId + '/items', function(data) {
+      $.getJSON(apiAddress + '/carts/' + cartId + '/items', function(data) {
         if (data.data.length == 0) {
         } else {
           $.each(data.data, function(i, item) {
@@ -69,7 +70,7 @@ $(document).ready(function() {
               if (quantity > 1) {
                 $.ajax({
                   method: "PUT",
-                  url: "http://localhost:3000/carts/" + cartId + '/items/' + item.id,
+                  url: apiAddress + "/carts/" + cartId + '/items/' + item.id,
                   data: { quantity: quantity }
                 })
                   .done(function() {
@@ -87,7 +88,7 @@ $(document).ready(function() {
               if (quantity > 0) {
                 $.ajax({
                   method: "PUT",
-                  url: "http://localhost:3000/carts/" + cartId + '/items/' + item.id,
+                  url: apiAddress + "/carts/" + cartId + '/items/' + item.id,
                   data: { quantity: quantity }
                 })
                   .done(function() {
@@ -103,7 +104,7 @@ $(document).ready(function() {
               var allTotalPrice= Number($('#total-price').text());
               $.ajax({
                 method: "DELETE",
-                url: "http://localhost:3000/carts/" + cartId + '/items/' + item.id,
+                url: apiAddress + "/carts/" + cartId + '/items/' + item.id,
               })
                 .done(function() {
                   $('tr#' + item.id).remove();
@@ -133,19 +134,23 @@ $(document).ready(function() {
     // 获取订单支付状态
     function getTradeStatus(cart_id) {
       $.ajax({
-          url: "/carts/" + cart_id + "orders/order_status",
+          url: apiAddress + "/carts/" + cart_id + "/orders/order_status",
           type: "GET",
           dataType:"json",
           data: "",
           success: function (data) {
             if (data.trade_status == 1) {
-              $('.gift-box-3-forward').click(function() {
-                $('a[data-tab = "3"]').removeClass('active');
-                $('div[data-tab = "3"]').removeClass('active');
-                $('a[data-tab = "4"]').addClass('active');
-                $('div[data-tab = "4"]').addClass('active');
-                $('a[data-tab = "3"]').addClass('disabled');
-              });
+              $('a[data-tab = "3"]').removeClass('active');
+              $('div[data-tab = "3"]').removeClass('active');
+              $('a[data-tab = "4"]').addClass('active');
+              $('a[data-tab = "4"]').removeClass('disabled');
+              $('div[data-tab = "4"]').addClass('active');
+              $('a[data-tab = "3"]').addClass('disabled');
+              $('a[data-tab = "1"]').addClass('disabled');
+              $('a[data-tab = "1"]').removeClass('active');
+              $('a[data-tab = "2"]').addClass('disabled');
+              $('a[data-tab = "2"]').removeClass('active');
+              document.getElementById('placeHolder').innerHTML = "";
             } else if (data.trade_status == 2) {
               alert("订单异常，请联系客服");
             }
@@ -192,13 +197,6 @@ $(document).ready(function() {
               $('div[data-tab = "3"]').removeClass('active');
               $('a[data-tab = "2"]').addClass('active');
               $('div[data-tab = "2"]').addClass('active');
-            });
-            $('.gift-box-3-forward').click(function() {
-              $('a[data-tab = "3"]').removeClass('active');
-              $('div[data-tab = "3"]').removeClass('active');
-              $('a[data-tab = "4"]').addClass('active');
-              $('div[data-tab = "4"]').addClass('active');
-              $('a[data-tab = "3"]').addClass('disabled');
             });
             // 提交配送信息
             $('.logistics')
@@ -247,6 +245,11 @@ $(document).ready(function() {
                 },
                 onSuccess : function() {
                   $('.gift-box-2-forward').removeClass('disabled');
+                  $('a[data-tab = "2"]').removeClass('active');
+                  $('div[data-tab = "2"]').removeClass('active');
+                  $('a[data-tab = "3"]').addClass('active');
+                  $('a[data-tab = "3"]').removeClass('disabled');
+                  $('div[data-tab = "3"]').addClass('active');
                 }
               });
 
@@ -260,10 +263,9 @@ $(document).ready(function() {
                 onSuccess : function(response) {
                   var msg = response.qrcode_url;
                   document.getElementById('placeHolder').innerHTML = '<iframe src=' + msg + ' title="二维码" frameborder="0" scrolling="no" width="150" height="150"></iframe>'
-                  setInterval("getTradeStatus(cartId)", 3000);
+                  setInterval(getTradeStatus, 3000, cartId);
                 }
               });
-
               $('.wxpay')
               .api({
                 action: 'get wxpay qrcode',
@@ -274,7 +276,7 @@ $(document).ready(function() {
                 onSuccess : function(response) {
                   var msg = response.qrcode_url;
                   writeQrcode(msg);
-                  setInterval("getTradeStatus(cartId)", 3000);
+                  setInterval(getTradeStatus, 3000, cartId);
                 }
               });
           },
