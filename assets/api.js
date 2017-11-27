@@ -132,6 +132,7 @@ $(document).ready(function() {
       document.getElementById('placeHolder').innerHTML = qr.createImgTag(4);
     };
     // 获取订单支付状态
+    var nIntervId;
     function getTradeStatus(cart_id) {
       $.ajax({
           url: apiAddress + "/carts/" + cart_id + "/orders/order_status",
@@ -140,6 +141,7 @@ $(document).ready(function() {
           data: "",
           success: function (data) {
             if (data.trade_status == 1) {
+              clearInterval(nIntervId);
               $('a[data-tab = "3"]').removeClass('active');
               $('div[data-tab = "3"]').removeClass('active');
               $('a[data-tab = "4"]').addClass('active');
@@ -266,7 +268,7 @@ $(document).ready(function() {
                 onSuccess : function(response) {
                   var msg = response.qrcode_url;
                   document.getElementById('placeHolder').innerHTML = '<iframe src=' + msg + ' title="二维码" frameborder="0" scrolling="no" width="150" height="150"></iframe>'
-                  setInterval(getTradeStatus, 3000, cartId);
+                  nIntervId = setInterval(getTradeStatus, 3000, cartId);
                 }
               });
               $('.wxpay')
@@ -279,7 +281,7 @@ $(document).ready(function() {
                 onSuccess : function(response) {
                   var msg = response.qrcode_url;
                   writeQrcode(msg);
-                  setInterval(getTradeStatus, 3000, cartId);
+                  nIntervId = setInterval(getTradeStatus, 3000, cartId);
                 }
               });
           },
