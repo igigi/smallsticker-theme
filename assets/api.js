@@ -1,4 +1,4 @@
-const apiAddress = 'http://localhost:3000'
+const apiAddress = 'http://47.93.239.217'
 $.fn.api.settings.api = {
   'create cart' : apiAddress + '/carts',
   'show cart'   : apiAddress + '/carts/{cart_id}',
@@ -198,6 +198,7 @@ $(document).ready(function() {
               $('div[data-tab = "3"]').removeClass('active');
               $('a[data-tab = "2"]').addClass('active');
               $('div[data-tab = "2"]').addClass('active');
+              document.getElementById('placeHolder').innerHTML = '';
             });
             // 提交配送信息
             $('.logistics')
@@ -251,6 +252,8 @@ $(document).ready(function() {
                   $('a[data-tab = "3"]').addClass('active');
                   $('a[data-tab = "3"]').removeClass('disabled');
                   $('div[data-tab = "3"]').addClass('active');
+                  $('a[data-tab = "2"]').addClass('disabled');
+                  $('a[data-tab = "1"]').addClass('disabled');
                 }
               });
 
