@@ -12,16 +12,130 @@ function getGiftCounter(cartId) {
   // 调用礼盒数量接口
   if (cartId) {
     $.get(apiAddress + '/carts/' + cartId, function(data) {
-      $('#gift-counter').text(data.data.attributes.items_count);
+      $('#gift-counter').text(data.cart.items_count);
     });
   } else {
     $.post(apiAddress + '/carts', function(data) {
-      sessionStorage.setItem('cart_id', data.data.id);
+      sessionStorage.setItem('cart_id', data.cart.uuid);
       cartId = sessionStorage.getItem('cart_id');
-      $('#gift-counter').text(data.data.attributes.items_count);
+      $('#gift-counter').text(data.cart.items_count);
     });
   };
 };
+// 礼盒清单接口
+function giftBoxModify () {
+  $.getJSON(apiAddress + '/carts/' + cartId + '/items', function(data) {
+    if (data.data.length == 0) {
+    } else {
+      $.each(data.data, function(i, item) {
+        $('tbody').append('<tr '  + 'id=' + item.id + '><td><button class="circular ui icon button remove-item"' + 'id=' + item.id + '><i class="remove icon"></i></button></td>' +
+        '<td>' + item.attributes.product_name + '</td>' +
+        '<td ' + 'id=price-' + item.id + '>' + item.attributes.product_price + '</td>' +
+        '<td>' + '<button class="circular ui icon button plus-item"' + 'id=' + item.id + '><i class="icon plus"></i></button>' +
+        '<span '+ 'id=quantity-' + item.id + '>' + item.attributes.quantity + '</span>' +
+        '<button class="circular ui icon button minus-item"' + 'id=' + item.id + '><i class="icon minus"></i></button>' + '</td>' +
+        '<td ' + 'id=total-price-' + item.id + '>'  + item.attributes.total_price + '</td>' +
+        '</tr>');
+        var price = Number($('#price-' + item.id).text())
+
+        $('#' + item.id + '.plus-item').click(function() {
+          var quantity = Number($('#quantity-' + item.id).text()) + 1
+          var totalPrice = Number($('#total-price-' + item.id).text())
+          var allTotalPrice= Number($('#total-price').text());
+          if (quantity > 1) {
+            $.ajax({
+              method: "PUT",
+              url: apiAddress + "/carts/" + cartId + '/items/' + item.id,
+              data: { quantity: quantity }
+            })
+              .done(function() {
+                $('#quantity-' + item.id).text(quantity);
+                $('#total-price-' + item.id).text(totalPrice + price);
+                $('#total-price').text(allTotalPrice + price);
+              });
+            };
+        });
+
+        $('#' + item.id + '.minus-item').click(function() {
+          var quantity = Number($('#quantity-' + item.id).text()) - 1
+          var totalPrice = Number($('#total-price-' + item.id).text())
+          var allTotalPrice= Number($('#total-price').text());
+          if (quantity > 0) {
+            $.ajax({
+              method: "PUT",
+              url: apiAddress + "/carts/" + cartId + '/items/' + item.id,
+              data: { quantity: quantity }
+            })
+              .done(function() {
+                $('#quantity-' + item.id).text(quantity);
+                $('#total-price-' + item.id).text(totalPrice - price);
+                $('#total-price').text(allTotalPrice - price);
+              });
+            };
+        });
+
+        $('#' + item.id +'.remove-item').click(function() {
+          var totalPrice = Number($('#total-price-' + item.id).text())
+          var allTotalPrice= Number($('#total-price').text());
+          $.ajax({
+            method: "DELETE",
+            url: apiAddress + "/carts/" + cartId + '/items/' + item.id,
+          })
+            .done(function() {
+              $('tr#' + item.id).remove();
+              if (allTotalPrice == totalPrice) {
+                $('.standart.modal').modal('show');
+                getGiftCounter(cartId);
+              } else {
+                $('#total-price').text(allTotalPrice - totalPrice);
+              }
+            })
+        });
+
+      });
+      $('#total-price').text(data.meta.cart_total_price);
+    }
+  });
+};
+// 写二维码图片到网页上
+function writeQrcode(msg) {
+  var typeNumber = 4;
+  var errorCorrectionLevel = 'L';
+  var qr = qrcode(typeNumber, errorCorrectionLevel);
+  qr.addData(msg);
+  qr.make();
+  document.getElementById('placeHolder').innerHTML = qr.createImgTag(4);
+};
+// 获取订单支付状态
+function getTradeStatus(cart_id) {
+  $.ajax({
+      url: apiAddress + "/carts/" + cart_id + "/orders/order_status",
+      type: "GET",
+      dataType:"json",
+      data: "",
+      success: function (data) {
+        if (data.trade_status == 1) {
+          clearInterval(nIntervId);
+          $('a[data-tab = "3"]').removeClass('active');
+          $('div[data-tab = "3"]').removeClass('active');
+          $('a[data-tab = "4"]').addClass('active');
+          $('a[data-tab = "4"]').removeClass('disabled');
+          $('div[data-tab = "4"]').addClass('active');
+          $('a[data-tab = "3"]').addClass('disabled');
+          $('a[data-tab = "1"]').addClass('disabled');
+          $('a[data-tab = "1"]').removeClass('active');
+          $('a[data-tab = "2"]').addClass('disabled');
+          $('a[data-tab = "2"]').removeClass('active');
+          document.getElementById('placeHolder').innerHTML = "";
+        } else if (data.trade_status == 2) {
+          alert("订单异常，请联系客服");
+        }
+      },
+      error: function () {
+         alert("请求订单状态出错");
+      }
+  });
+}
 $(document).ready(function() {
   getGiftCounter(cartId);
   // 调用添加到礼盒接口
@@ -47,122 +161,7 @@ $(document).ready(function() {
         flash      : '<i class="archive icon"></i>已放入礼盒'
       }
     });
-    // 礼盒清单接口
-    function giftBoxModify () {
-      $.getJSON(apiAddress + '/carts/' + cartId + '/items', function(data) {
-        if (data.data.length == 0) {
-        } else {
-          $.each(data.data, function(i, item) {
-            $('tbody').append('<tr '  + 'id=' + item.id + '><td><button class="circular ui icon button remove-item"' + 'id=' + item.id + '><i class="remove icon"></i></button></td>' +
-            '<td>' + item.attributes.product_name + '</td>' +
-            '<td ' + 'id=price-' + item.id + '>' + item.attributes.product_price + '</td>' +
-            '<td>' + '<button class="circular ui icon button plus-item"' + 'id=' + item.id + '><i class="icon plus"></i></button>' +
-            '<span '+ 'id=quantity-' + item.id + '>' + item.attributes.quantity + '</span>' +
-            '<button class="circular ui icon button minus-item"' + 'id=' + item.id + '><i class="icon minus"></i></button>' + '</td>' +
-            '<td ' + 'id=total-price-' + item.id + '>'  + item.attributes.total_price + '</td>' +
-            '</tr>');
-            var price = Number($('#price-' + item.id).text())
-
-            $('#' + item.id + '.plus-item').click(function() {
-              var quantity = Number($('#quantity-' + item.id).text()) + 1
-              var totalPrice = Number($('#total-price-' + item.id).text())
-              var allTotalPrice= Number($('#total-price').text());
-              if (quantity > 1) {
-                $.ajax({
-                  method: "PUT",
-                  url: apiAddress + "/carts/" + cartId + '/items/' + item.id,
-                  data: { quantity: quantity }
-                })
-                  .done(function() {
-                    $('#quantity-' + item.id).text(quantity);
-                    $('#total-price-' + item.id).text(totalPrice + price);
-                    $('#total-price').text(allTotalPrice + price);
-                  });
-                };
-            });
-
-            $('#' + item.id + '.minus-item').click(function() {
-              var quantity = Number($('#quantity-' + item.id).text()) - 1
-              var totalPrice = Number($('#total-price-' + item.id).text())
-              var allTotalPrice= Number($('#total-price').text());
-              if (quantity > 0) {
-                $.ajax({
-                  method: "PUT",
-                  url: apiAddress + "/carts/" + cartId + '/items/' + item.id,
-                  data: { quantity: quantity }
-                })
-                  .done(function() {
-                    $('#quantity-' + item.id).text(quantity);
-                    $('#total-price-' + item.id).text(totalPrice - price);
-                    $('#total-price').text(allTotalPrice - price);
-                  });
-                };
-            });
-
-            $('#' + item.id +'.remove-item').click(function() {
-              var totalPrice = Number($('#total-price-' + item.id).text())
-              var allTotalPrice= Number($('#total-price').text());
-              $.ajax({
-                method: "DELETE",
-                url: apiAddress + "/carts/" + cartId + '/items/' + item.id,
-              })
-                .done(function() {
-                  $('tr#' + item.id).remove();
-                  if (allTotalPrice == totalPrice) {
-                    $('.standart.modal').modal('show');
-                    getGiftCounter(cartId);
-                  } else {
-                    $('#total-price').text(allTotalPrice - totalPrice);
-                  }
-                })
-            });
-
-          });
-          $('#total-price').text(data.meta.cart_total_price);
-        }
-      });
-    };
-    // 写二维码图片到网页上
-    function writeQrcode(msg) {
-      var typeNumber = 4;
-      var errorCorrectionLevel = 'L';
-      var qr = qrcode(typeNumber, errorCorrectionLevel);
-      qr.addData(msg);
-      qr.make();
-      document.getElementById('placeHolder').innerHTML = qr.createImgTag(4);
-    };
-    // 获取订单支付状态
     var nIntervId;
-    function getTradeStatus(cart_id) {
-      $.ajax({
-          url: apiAddress + "/carts/" + cart_id + "/orders/order_status",
-          type: "GET",
-          dataType:"json",
-          data: "",
-          success: function (data) {
-            if (data.trade_status == 1) {
-              clearInterval(nIntervId);
-              $('a[data-tab = "3"]').removeClass('active');
-              $('div[data-tab = "3"]').removeClass('active');
-              $('a[data-tab = "4"]').addClass('active');
-              $('a[data-tab = "4"]').removeClass('disabled');
-              $('div[data-tab = "4"]').addClass('active');
-              $('a[data-tab = "3"]').addClass('disabled');
-              $('a[data-tab = "1"]').addClass('disabled');
-              $('a[data-tab = "1"]').removeClass('active');
-              $('a[data-tab = "2"]').addClass('disabled');
-              $('a[data-tab = "2"]').removeClass('active');
-              document.getElementById('placeHolder').innerHTML = "";
-            } else if (data.trade_status == 2) {
-              alert("订单异常，请联系客服");
-            }
-          },
-          error: function () {
-             alert("请求订单状态出错");
-          }
-      });
-  	}
-
     $('.gift-box').click(function(){
       var giftCounter = $('#gift-counter').text();
       if (giftCounter == 0) {
@@ -289,7 +288,4 @@ $(document).ready(function() {
         }).modal('show');
       };
     });
-
-
-
 });
