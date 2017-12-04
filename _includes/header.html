@@ -6,7 +6,6 @@
   <div class="ui text container">
     <a href="/" class="header item">
       <img class="logo" src="{{"assets/images/logo.png" | relative_url}}">
-      小贴画
     </a>
     {% assign default_paths = site.pages | sort: 'nav-order' | map: "path" %}
     {% assign page_paths = site.header_pages | default: default_paths %}
