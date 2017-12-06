@@ -7,7 +7,8 @@ $.fn.api.settings.api = {
   'get alipay qrcode' : apiAddress + '/carts/{cart_id}/orders/alipay',
   'get wxpay qrcode' : apiAddress + '/carts/{cart_id}/orders/wxpay',
 };
-var cartId = sessionStorage.getItem('cart_id');
+// var cartId = sessionStorage.getItem('cart_id');
+var cartId = document.cookie.replace(/(?:(?:^|.*;\s*)cart_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 function getGiftCounter(cartId) {
   // 调用礼盒数量接口
   if (cartId) {
@@ -17,7 +18,8 @@ function getGiftCounter(cartId) {
   } else {
     $.post(apiAddress + '/carts', function(data) {
       sessionStorage.setItem('cart_id', data.cart.uuid);
-      cartId = sessionStorage.getItem('cart_id');
+      document.cookie = "cart_id=" + data.cart.uuid;
+      cartId = document.cookie.replace(/(?:(?:^|.*;\s*)cart_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
       $('#gift-counter').text(data.cart.items_count);
     });
   };
