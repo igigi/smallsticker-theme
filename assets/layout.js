@@ -1,3 +1,11 @@
+function writeQrcode(msg) {
+  var typeNumber = 4;
+  var errorCorrectionLevel = 'L';
+  var qr = qrcode(typeNumber, errorCorrectionLevel);
+  qr.addData(msg);
+  qr.make();
+  qr.createImgTag(4);
+};
 $(document)
   .ready(function() {
 
@@ -20,6 +28,13 @@ $(document)
 
     $('.ui.radio.checkbox')
       .checkbox()
+    ;
+    $('.popup-wechat')
+      .popup({
+        on    : 'click',
+        html : "<div class='header'>扫码关注小贴画</div>" + writeQrcode("aaa"),
+        position : "top center"
+      })
     ;
     // lazy load images
     $('.image').visibility({
