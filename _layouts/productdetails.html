@@ -36,7 +36,7 @@ head:
       放入礼盒
     </button>
     <div class="ui divider" ></div>
-    <button class="ui green mini button right floated wechat-box">
+    <button class="ui green mini button right floated popup-wechat">
       <i class="wechat icon"></i>
       微信分享
     </button>
@@ -62,6 +62,24 @@ head:
   </div>
 </div>
 <script>
+  /* wechatShare */
+  var image = '微信扫一扫'
+  function writeQrcodeImage(message) {
+    var typeNumber = 4;
+    var errorCorrectionLevel = 'L';
+    var qr = qrcode(typeNumber, errorCorrectionLevel);
+    qr.addData(message);
+    qr.make();
+    image = image + qr.createImgTag(4);
+  };
+  writeQrcodeImage(document.URL);
+  $('.popup-wechat')
+    .popup({
+      on : "click",
+      position : "top center",
+      html: image
+    })
+  ;
   /* weiboShare */
   function weiboShare(){
       var wb_shareBtn = document.getElementById("shareBtn")

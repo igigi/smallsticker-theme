@@ -40,7 +40,7 @@ layout: home
     <i class="weibo icon"></i>
     微博分享
   </a>
-  <button class="ui green mini button wechat-box">
+  <button class="ui green mini button popup-wechat">
     <i class="wechat icon"></i>
     微信分享
   </button>
@@ -50,6 +50,24 @@ layout: home
   {% include disqus_comments.html %}
 {% endif %}
 <script>
+  /* wechatShare */
+  var image = '微信扫一扫'
+  function writeQrcodeImage(message) {
+    var typeNumber = 4;
+    var errorCorrectionLevel = 'L';
+    var qr = qrcode(typeNumber, errorCorrectionLevel);
+    qr.addData(message);
+    qr.make();
+    image = image + qr.createImgTag(4);
+  };
+  writeQrcodeImage(document.URL);
+  $('.popup-wechat')
+    .popup({
+      on : "click",
+      position : "top center",
+      html: image
+    })
+  ;
   /* weiboShare */
   function weiboShare(){
       var wb_shareBtn = document.getElementById("shareBtn")

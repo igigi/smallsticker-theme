@@ -1,14 +1,6 @@
-function writeQrcode(msg) {
-  var typeNumber = 4;
-  var errorCorrectionLevel = 'L';
-  var qr = qrcode(typeNumber, errorCorrectionLevel);
-  qr.addData(msg);
-  qr.make();
-  qr.createImgTag(4);
-};
+
 $(document)
   .ready(function() {
-
     // fix main menu to page on passing
     $('.main.menu').visibility({
       type: 'fixed'
@@ -29,11 +21,22 @@ $(document)
     $('.ui.radio.checkbox')
       .checkbox()
     ;
-    $('.popup-wechat')
+
+    var image = '微信扫码关注'
+    function writeQrcodeImage(message) {
+      var typeNumber = 4;
+      var errorCorrectionLevel = 'L';
+      var qr = qrcode(typeNumber, errorCorrectionLevel);
+      qr.addData(message);
+      qr.make();
+      image = image + qr.createImgTag(4);
+    };
+    writeQrcodeImage("http://weixin.qq.com/r/CjlPV63EivD1rek092wY");
+    $('.wechat-attention')
       .popup({
-        on    : 'click',
-        html : "<div class='header'>扫码关注小贴画</div>" + writeQrcode("aaa"),
-        position : "top center"
+        on : "click",
+        position : "top center",
+        html: image
       })
     ;
     // lazy load images
