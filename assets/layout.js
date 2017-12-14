@@ -45,7 +45,14 @@ $(document)
       transition: 'vertical flip in',
       duration: 500
     });
-
+    $('.message .close')
+      .on('click', function() {
+        $(this)
+          .closest('.message')
+          .transition('fade')
+        ;
+      })
+    ;
     // show dropdown on hover
     $('.main.menu  .ui.dropdown').dropdown({
       on: 'hover'

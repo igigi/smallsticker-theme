@@ -6,6 +6,7 @@ $.fn.api.settings.api = {
   'submit order info' : apiAddress + '/carts/{cart_id}/orders',
   'get alipay qrcode' : apiAddress + '/carts/{cart_id}/orders/alipay',
   'get wxpay qrcode' : apiAddress + '/carts/{cart_id}/orders/wxpay',
+  'subscribe email list' : apiAddress + '/emails/subscribe'
 };
 // var cartId = sessionStorage.getItem('cart_id');
 var cartId = document.cookie.replace(/(?:(?:^|.*;\s*)cart_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
@@ -140,6 +141,24 @@ function getTradeStatus(cart_id) {
 }
 $(document).ready(function() {
   getGiftCounter(cartId);
+  // 订阅邮件列表接口
+  $( ".subscribe" ).api({
+    action: 'subscribe email list',
+    method: 'POST',
+    serializeForm: true,
+    onSuccess : function() {
+    }
+  }).state({
+      onActivate: function() {
+        $(this).state('flash text');
+      },
+      text: {
+        inactive   : '订阅',
+        active     : '订阅成功',
+        flash      : '订阅成功'
+      }
+    });
+
   // 调用添加到礼盒接口
   $('.smallsticker-add-item').api({
     action: 'add item to cart',
