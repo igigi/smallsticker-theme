@@ -1,4 +1,4 @@
-const apiAddress = 'http://localhost:3000'
+var apiAddress = 'http://localhost:3000'
 $.fn.api.settings.api = {
   'create cart' : apiAddress + '/carts',
   'show cart'   : apiAddress + '/carts/{cart_id}',
@@ -96,6 +96,7 @@ function giftBoxModify () {
         });
 
       });
+      $('#cart-freight').text(data.meta.cart_freight);
       $('#total-price').text(data.meta.cart_total_price);
     }
   });
