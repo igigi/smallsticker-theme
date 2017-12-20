@@ -64,15 +64,15 @@ head:
 <script>
   /* wechatShare */
   var image = '微信扫一扫'
-  function writeQrcodeImage(message) {
-    var typeNumber = 4;
+  function writeQrcodeProductImage(message) {
+    var typeNumber = 0;
     var errorCorrectionLevel = 'L';
     var qr = qrcode(typeNumber, errorCorrectionLevel);
     qr.addData(message);
     qr.make();
     image = image + qr.createImgTag(4);
   };
-  writeQrcodeImage(document.URL);
+  writeQrcodeProductImage(document.URL);
   $('.popup-wechat')
     .popup({
       on : "click",

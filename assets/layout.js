@@ -24,7 +24,7 @@ $(document)
 
     var image = '微信扫码关注'
     function writeQrcodeImage(message) {
-      var typeNumber = 4;
+      var typeNumber = 0;
       var errorCorrectionLevel = 'L';
       var qr = qrcode(typeNumber, errorCorrectionLevel);
       qr.addData(message);

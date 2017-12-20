@@ -1,4 +1,4 @@
-var apiAddress = 'http://localhost:3000'
+var apiAddress = 'http://47.93.239.217'
 $.fn.api.settings.api = {
   'create cart' : apiAddress + '/carts',
   'show cart'   : apiAddress + '/carts/{cart_id}',
