@@ -3,10 +3,8 @@
   <p>给自己一个标签，表达自我，激励自己！</p>
 </div>
 <div class="ui borderless main menu">
-  <div class="ui text container">
-    <a href="/" class="header item">
-      <img class="logo" src="{{"assets/images/logo.png" | relative_url}}">
-    </a>
+  <div class="ui text container" id="nav">
+    <a href="/" class="header item"><img class="logo" src="{{"assets/images/logo.png" | relative_url}}"></a>
     {% assign default_paths = site.pages | sort: 'nav-order' | map: "path" %}
     {% assign page_paths = site.header_pages | default: default_paths %}
     {% if page_paths %}
@@ -17,9 +15,7 @@
         {% endif %}
       {% endfor %}
     {% endif %}
-    <a class="item right floated gift-box">
-       <i class="gift red large icon"></i>礼盒
-       <div class="ui left pointing teal label" id="gift-counter">等我一下</div>
-    </a>
+    <a class="item right floated gift-box"><i class="gift red large icon"></i>礼盒<div class="ui left pointing teal label" id="gift-counter">等我一下</div></a>
   </div>
+
 </div>

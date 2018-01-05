@@ -13,14 +13,14 @@ head:
 <h1 class="ui dividing header">{{ page.name | escape }}</h1>
 <div class="ui stackable two column divided grid container">
   <div class="column">
-  <div class="ui image">
-    <div class="ui labels">
-      {% for tag in page.tags %}
-        <a class="ui teal ribbon label"  href="/标签/{{ page.categories }}标签/{{ tag }}">{{ tag | capitalize }}</a><br /><br />
-      {% endfor %}
+    <div class="ui image">
+      <div class="ui labels">
+        {% for tag in page.tags %}
+          <a class="ui teal ribbon label"  href="/标签/{{ page.categories }}标签/{{ tag }}">{{ tag | capitalize }}</a><br /><br />
+        {% endfor %}
+      </div>
+      <img src="{{ page.image | relative_url }}" alt="{{ page.name }}">
     </div>
-    <img src="{{ page.image | relative_url }}" alt="{{ page.name }}">
-  </div>
   </div>
   <div class="column">
     <h2 class="sub header">
@@ -36,14 +36,6 @@ head:
       放入礼盒
     </button>
     <div class="ui divider" ></div>
-    <button class="ui green mini button right floated popup-wechat">
-      <i class="wechat icon"></i>
-      微信分享
-    </button>
-    <a class="ui red mini button right floated" id="shareBtn" target="_blank">
-      <i class="weibo icon"></i>
-      微博分享
-    </a>
 
     <div class="ui top attached tabular menu">
       <a class="item active" data-tab="first">描述</a>
@@ -59,7 +51,17 @@ head:
     <div class="ui bottom attached tab segment" data-tab="third">
       {{ page.other }}
     </div>
+    <a class="ui red mini button " id="shareBtn" target="_blank">
+      <i class="weibo icon"></i>
+      微博分享
+    </a>
+    <button class="ui green mini button popup-wechat">
+      <i class="wechat icon"></i>
+      微信分享
+    </button>
+
   </div>
+
 </div>
 <script>
   /* wechatShare */

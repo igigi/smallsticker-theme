@@ -1,4 +1,4 @@
-var apiAddress = 'http://47.93.239.217'
+var apiAddress = 'http://localhost:3000'
 $.fn.api.settings.api = {
   'create cart' : apiAddress + '/carts',
   'show cart'   : apiAddress + '/carts/{cart_id}',
@@ -15,6 +15,7 @@ function getGiftCounter(cartId) {
   if (cartId) {
     $.get(apiAddress + '/carts/' + cartId, function(data) {
       $('#gift-counter').text(data.cart.items_count);
+      $('#mobile-gift-counter').text(data.cart.items_count);
     });
   } else {
     $.post(apiAddress + '/carts', function(data) {
@@ -22,6 +23,7 @@ function getGiftCounter(cartId) {
       document.cookie = "cart_id=" + data.cart.uuid;
       cartId = document.cookie.replace(/(?:(?:^|.*;\s*)cart_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
       $('#gift-counter').text(data.cart.items_count);
+      $('#mobile-gift-counter').text(data.cart.items_count);
     });
   };
 };
@@ -173,6 +175,7 @@ $(document).ready(function() {
     },
     onSuccess: function(response) {
       $('#gift-counter').transition('flash').text(Number($('#gift-counter').text()) + 1);
+      $('#mobile-gift-counter').transition('flash').text(Number($('#gift-counter').text()) + 1);
     }
   }).state({
       onActivate: function() {

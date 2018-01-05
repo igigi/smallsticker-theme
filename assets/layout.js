@@ -57,5 +57,16 @@ $(document)
     $('.main.menu  .ui.dropdown').dropdown({
       on: 'hover'
     });
+
+    $("#nav").addClass("js").before('<i class="big sidebar icon " id="menu"></i><a class="item right floated gift-box" id="gift-box"><i class="gift red large icon"></i>礼盒<div class="ui left pointing teal label" id="mobile-gift-counter">等我一下</div></a>');
+  	$("#menu").click(function(){
+      $(".gift-box").toggle();
+  		$("#nav").toggle();
+  	});
+  	$(window).resize(function(){
+  		if(window.innerWidth > 768) {
+  			$("#nav").removeAttr("style");
+  		}
+  	});
   })
 ;

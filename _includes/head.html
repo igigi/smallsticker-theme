@@ -4,7 +4,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {% seo %}
   <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
-  <script src="{{ "/assets/application-7ee859fa2cc53ff663f69163ad25191005b89fdbb1e7078c1bdec1dd7f068bc9.js" | relative_url }}"></script>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <script src="{{ "/assets/semantic.js" | relative_url }}"></script>
+  <script src="{{ "/assets/qrcode.js" | relative_url }}"></script>
+  <script src="{{ "/assets/layout.js" | relative_url }}"></script>
+  <script src="{{ "/assets/api.js" | relative_url }}"></script>
 
   <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }}" href="{{ "/feed.xml" | relative_url }}">
   {% if jekyll.environment == 'production' and site.google_analytics %}

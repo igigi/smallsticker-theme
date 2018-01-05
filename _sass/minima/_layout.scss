@@ -19,6 +19,17 @@ body {
   margin-right: 1.5em;
 }
 
+@media screen and (max-width: 768px) {
+  #nav.js {
+    display: none;
+  }
+}
+@media screen and (min-width: 768px) {
+  #menu, #gift-box {
+    display: none;
+  }
+}
+
 .main.menu.fixed {
   background-color: #FFFFFF;
 

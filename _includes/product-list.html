@@ -10,10 +10,10 @@
 <div class="ui tag labels">
   <span>标签：</span>
   {% for tag in tags %}
-      <a class="ui teal tag label" href="/标签/{{ page.title }}标签/{{ tag }}">{{ tag | capitalize }}</a>
+      <a class="ui teal tiny label" href="/标签/{{ page.title }}标签/{{ tag }}">{{ tag | capitalize }}</a>
   {% endfor %}
 </div>
-
+<div class="ui divider"></div>
 <div class="ui four doubling stackable cards">
   {% for product in products %}
     <div class="card">
