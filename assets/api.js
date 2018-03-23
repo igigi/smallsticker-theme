@@ -1,4 +1,5 @@
-var apiAddress = 'http://localhost:3000'
+var apiAddress = 'http://localhost:3000';
+var nIntervId;
 $.fn.api.settings.api = {
   'create cart' : apiAddress + '/carts',
   'show cart'   : apiAddress + '/carts/{cart_id}',
@@ -186,7 +187,7 @@ $(document).ready(function() {
         flash      : '<i class="archive icon"></i>已放入礼盒'
       }
     });
-    var nIntervId;
+
     $('.gift-box').click(function(){
       var giftCounter = $('#gift-counter').text();
       if (giftCounter == 0) {
