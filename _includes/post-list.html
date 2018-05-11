@@ -1,0 +1,37 @@
+<div class="ui breadcrumb">
+  <a class="section" href="/">主页</a>
+  <i class="right angle icon divider"></i>
+  <div class="active section" href="/" >新闻列表</div>
+</div>
+<a href="{{ "/feed.xml" | relative_url }}" class="ui right floated blue button"><i class="rss square icon"></i>RSS订阅</a>
+<h1 class="ui dividing header">新闻</h1>
+<span>标签：</span>
+{% for tag in site.tags %}
+    <a class="ui teal tag label" href="/标签/新闻标签/{{ tag[0] }}">{{ tag[0] | capitalize }}</a>
+{% endfor %}
+
+<div class="ui divided items">
+  {% for post in site.posts %}
+  {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
+    <div class="item">
+      <div class="image">
+        <img src="{{ post.image | relative_url }}">
+      </div>
+      <div class="content">
+        <a class="header" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+        <div class="meta">
+          <span class="cinema">{{ post.date | date: date_format }}</span>
+        </div>
+        <div class="description">
+          <p>{{ post.excerpt}}</p>
+        </div>
+        <div class="extra">
+          <a class="ui right floated primary button"  href="{{ post.url | relative_url }}">
+            阅读更多
+            <i class="right chevron icon"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
