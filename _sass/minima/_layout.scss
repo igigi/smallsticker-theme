@@ -1,8 +1,3 @@
-body {
-  background-color: #00FFFF;
-}
-
-
 @media screen and (max-width: 768px) {
   #nav.js {
     display: none;
@@ -15,13 +10,6 @@ body {
 }
 
 
-
-.text.container .left.floated.image {
-  margin: 2em 2em 2em -4em;
-}
-.text.container .right.floated.image {
-  margin: 2em -4em 2em 2em;
-}
 
 .ui.footer.segment {
   margin: 5em 0em 0em;

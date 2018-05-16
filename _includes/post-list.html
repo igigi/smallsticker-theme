@@ -1,15 +1,14 @@
 <div class="ui breadcrumb">
   <a class="section" href="/">主页</a>
   <i class="right angle icon divider"></i>
-  <div class="active section" href="/" >新闻列表</div>
+  <div class="active section" href="/" >博客列表</div>
 </div>
 <a href="{{ "/feed.xml" | relative_url }}" class="ui right floated blue button"><i class="rss square icon"></i>RSS订阅</a>
-<h1 class="ui dividing header">新闻</h1>
+<h1 class="ui dividing header">博客</h1>
 <span>标签：</span>
 {% for tag in site.tags %}
-    <a class="ui teal tag label" href="/标签/新闻标签/{{ tag[0] }}">{{ tag[0] | capitalize }}</a>
+    <a class="ui tag tiny yellow label" href="/标签/博客标签/{{ tag[0] }}">{{ tag[0] | capitalize }}</a>
 {% endfor %}
-
 <div class="ui divided items">
   {% for post in site.posts %}
   {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
@@ -27,7 +26,7 @@
         </div>
         <div class="extra">
           <a class="ui right floated primary button"  href="{{ post.url | relative_url }}">
-            阅读更多
+            更多
             <i class="right chevron icon"></i>
           </a>
         </div>

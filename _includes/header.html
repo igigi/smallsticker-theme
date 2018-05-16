@@ -1,18 +1,23 @@
 
-<div class="ui borderless main menu">
+<div class="ui main borderless menu">
   <div class="ui text container" id="nav">
-    <a href="/" class="header item"><img class="logo" src="{{"assets/images/logo.png" | relative_url}}"></a>
     {% assign default_paths = site.pages | sort: 'nav-order' | map: "path" %}
     {% assign page_paths = site.header_pages | default: default_paths %}
     {% if page_paths %}
       {% for path in page_paths %}
         {% assign my_page = site.pages | where: "path", path | first %}
         {% if my_page.nav-order %}
-        <a class="item {% if my_page.url == page.url %} active {% endif %}" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
+        <a class="item {% if my_page.url == page.url and my_page.nav-order != 0  %} active {% endif %} {% if my_page.nav-order == 0 %} header {% endif %}" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
         {% endif %}
       {% endfor %}
     {% endif %}
-    <a class="item right floated gift-box"><i class="cart red large icon"></i>礼盒<div class="ui left pointing teal label" id="gift-counter">等我一下</div></a>
+    <div class="item">
+      <div class="ui icon input">
+        <input type="text" placeholder="搜索...">
+        <i class="search icon"></i>
+      </div>
+    </div>
+    <a class="item right floated gift-box"><i class="cart red icon"></i><div class="ui left pointing red label" id="gift-counter">等我一下</div></a>
   </div>
 
 </div>

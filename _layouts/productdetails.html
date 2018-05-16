@@ -16,7 +16,7 @@ head:
     <div class="ui image">
       <div class="ui labels">
         {% for tag in page.tags %}
-          <a class="ui teal ribbon label"  href="/标签/{{ page.categories }}标签/{{ tag }}">{{ tag | capitalize }}</a><br /><br />
+          <a class="ui yellow ribbon label"  href="/标签/{{ page.categories }}标签/{{ tag }}">{{ tag | capitalize }}</a><br /><br />
         {% endfor %}
       </div>
       <img src="{{ page.image | relative_url }}" alt="{{ page.name }}">
@@ -33,7 +33,7 @@ head:
       data-item-url="{{ site.baseurl }}"
       data-item-price="{{ page.price }}">
       <i class="plus icon"></i>
-      放入礼盒
+      放入购物车
     </button>
     <div class="ui divider" ></div>
 
@@ -53,11 +53,11 @@ head:
     </div>
     <a class="ui red mini button " id="shareBtn" target="_blank">
       <i class="weibo icon"></i>
-      微博分享
+      分享
     </a>
     <button class="ui green mini button popup-wechat">
       <i class="wechat icon"></i>
-      微信分享
+      分享
     </button>
 
   </div>
