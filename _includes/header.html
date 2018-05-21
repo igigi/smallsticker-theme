@@ -1,5 +1,5 @@
 
-<div class="ui main borderless menu">
+<div class="ui  borderless sticky menu">
   <div class="ui text container" id="nav">
     {% assign default_paths = site.pages | sort: 'nav-order' | map: "path" %}
     {% assign page_paths = site.header_pages | default: default_paths %}
@@ -12,11 +12,17 @@
       {% endfor %}
     {% endif %}
     <div class="item">
-      <div class="ui icon input">
-        <input type="text" placeholder="搜索...">
-        <i class="search icon"></i>
-      </div>
+      <form action="/search.html" method="get">
+        <div class="ui mini action input">
+            <input type="text" id="search-box" name="query" placeholder="搜索...">
+            <button class="ui icon button">
+              <i class="search icon"></i>
+            </button>
+        </div>
+      </form>
     </div>
+
+
     <a class="item right floated gift-box"><i class="cart red icon"></i><div class="ui left pointing red label" id="gift-counter">等我一下</div></a>
   </div>
 

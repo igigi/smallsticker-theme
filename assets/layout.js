@@ -1,8 +1,10 @@
 
 $(document)
   .ready(function() {
-    // fix main menu to page on passing
 
+    $('.ui.sticky').visibility({
+      type: 'fixed'
+    });
 
     $('.wechat-box').click(function(){
       $('.mini.wechat-box.modal').modal('show');
@@ -37,24 +39,8 @@ $(document)
         html: image
       })
     ;
-    // lazy load images
-    $('.image').visibility({
-      type: 'image',
-      transition: 'vertical flip in',
-      duration: 500
-    });
-    $('.message .close')
-      .on('click', function() {
-        $(this)
-          .closest('.message')
-          .transition('fade')
-        ;
-      })
-    ;
-    // show dropdown on hover
-    $('.main.menu  .ui.dropdown').dropdown({
-      on: 'hover'
-    });
+
+
 
     $("#nav").addClass("js").before('<i class="big sidebar icon " id="menu"></i><a class="item right floated gift-box" id="gift-box"><i class="cart red large icon"></i>礼盒<div class="ui left pointing teal label" id="mobile-gift-counter">等我一下</div></a>');
   	$("#menu").click(function(){

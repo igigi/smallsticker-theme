@@ -4,16 +4,11 @@
       <div class="three wide column">
         <h4 class="ui  header">产品类别</h4>
         <div class="ui link list">
-
-
           {% assign default_paths = site.pages | sort: 'nav-order' | map: "path" %}
-
           {% assign page_paths = site.header_pages | default: default_paths %}
-
           {% if page_paths %}
             {% for path in page_paths %}
               {% assign my_page = site.pages | where: "path", path | first %}
-
               {% if my_page.nav-order and my_page.nav-order != 0 %}
               <a class="item" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
               {% endif %}
@@ -38,23 +33,12 @@
       <div class="seven wide column">
         <a class="ui button" href="/博客">博客</a>
         <h4 class="ui  header">关注我们</h4>
-
           <a class="item ui button" href="http://weibo.com/6152967474" target="_blank">
             <i class="weibo large red icon"></i>
           </a>
           <button class="item ui button wechat-attention">
             <i class="wechat large green icon"></i>
           </button>
-
-
-        <h4 class="ui  header">邮件订阅</h4>
-        <form class="ui form">
-          <div class="ui fluid action input">
-            <input type="text" name="email_address" placeholder="填写邮箱地址，接收新品更新和最新的博客文章...">
-            <div class="ui subscribe button">订阅</div>
-          </div>
-        </form>
-
       </div>
     </div>
     <div class="ui  section divider"></div>
