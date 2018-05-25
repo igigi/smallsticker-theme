@@ -182,26 +182,26 @@ $(document).ready(function() {
             giftBoxModify();
           },
           onVisible : function() {
-            $('.gift-box-1').click(function() {
+            $('.cart-box-1').click(function() {
               $('a[data-tab = "1"]').removeClass('active');
               $('div[data-tab = "1"]').removeClass('active');
               $('a[data-tab = "2"]').addClass('active');
               $('div[data-tab = "2"]').addClass('active');
             });
-            $('.gift-box-2-backward').click(function() {
+            $('.cart-box-2-backward').click(function() {
               $('a[data-tab = "2"]').removeClass('active');
               $('div[data-tab = "2"]').removeClass('active');
               $('a[data-tab = "1"]').addClass('active');
               $('div[data-tab = "1"]').addClass('active');
             });
-            $('.gift-box-2-forward').click(function() {
+            $('.cart-box-2-forward').click(function() {
               $('a[data-tab = "2"]').removeClass('active');
               $('div[data-tab = "2"]').removeClass('active');
               $('a[data-tab = "3"]').addClass('active');
               $('a[data-tab = "3"]').removeClass('disabled');
               $('div[data-tab = "3"]').addClass('active');
             });
-            $('.gift-box-3-backward').click(function() {
+            $('.cart-box-3-backward').click(function() {
               $('a[data-tab = "3"]').removeClass('active');
               $('div[data-tab = "3"]').removeClass('active');
               $('a[data-tab = "2"]').addClass('active');
@@ -254,7 +254,7 @@ $(document).ready(function() {
                   cart_id: cartId
                 },
                 onSuccess : function() {
-                  $('.gift-box-2-forward').removeClass('disabled');
+                  $('.cart-box-2-forward').removeClass('disabled');
                   $('a[data-tab = "2"]').removeClass('active');
                   $('div[data-tab = "2"]').removeClass('active');
                   $('a[data-tab = "3"]').addClass('active');
