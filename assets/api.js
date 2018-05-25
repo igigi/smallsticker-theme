@@ -1,4 +1,4 @@
-var apiAddress = 'http://localhost:3000';
+var apiAddress = 'https://api.smallsticker.com'
 var nIntervId;
 $.fn.api.settings.api = {
   'create cart' : apiAddress + '/carts',
