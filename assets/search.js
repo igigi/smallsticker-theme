@@ -13,7 +13,7 @@
 
       searchResults.innerHTML = appendString;
     } else {
-      searchResults.innerHTML = '<li>No results found</li>';
+      searchResults.innerHTML = '<div class="ui message">没搜索的任何内容，换个关键词吧</div>';
     }
   }
 
