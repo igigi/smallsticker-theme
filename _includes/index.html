@@ -1,0 +1,86 @@
+<div class="ui grid">
+  <div class="center aligned row">
+    <div class="column">
+      <h4 class="ui header">贴纸</h4>
+    </div>
+  </div>
+  <div class="ui divider"></div>
+  <div class="equal width row">
+    {% assign products = site.products | where: "categories", "贴纸" %}
+    <div class="ui four doubling stackable cards">
+      {% for product in products limit:4 %}
+        <div class="card">
+          {% include product.html %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="right aligned row">
+    <div class="column">
+      <a href="/贴纸">更多...</a>
+    </div>
+  </div>
+  <div class="center aligned row">
+    <div class="column">
+      <h4 class="ui header">马克杯</h4>
+    </div>
+  </div>
+  <div class="ui divider"></div>
+  <div class="equal width row">
+    {% assign products = site.products | where: "categories", "马克杯" %}
+    <div class="ui four doubling stackable cards">
+      {% for product in products limit:4 %}
+        <div class="card">
+          {% include product.html %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="right aligned row">
+    <div class="column">
+      <a href="/马克杯">更多...</a>
+    </div>
+  </div>
+  <div class="center aligned row">
+    <div class="column">
+      <h4 class="ui header">短袖</h4>
+    </div>
+  </div>
+  <div class="ui divider"></div>
+  <div class="equal width row">
+    {% assign products = site.products | where: "categories", "短袖" %}
+    <div class="ui four doubling stackable cards">
+      {% for product in products limit:4 %}
+        <div class="card">
+          {% include product.html %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="right aligned row">
+    <div class="column">
+      <a href="/短袖">更多...</a>
+    </div>
+  </div>
+  <div class="center aligned row">
+    <div class="column">
+      <h4 class="ui header">卫衣</h4>
+    </div>
+  </div>
+  <div class="ui divider"></div>
+  <div class="equal width row">
+    {% assign products = site.products | where: "categories", "卫衣" %}
+    <div class="ui four doubling stackable cards">
+      {% for product in products limit:4 %}
+        <div class="card">
+          {% include product.html %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="right aligned row">
+    <div class="column">
+      <a href="/卫衣">更多...</a>
+    </div>
+  </div>
+</div>
