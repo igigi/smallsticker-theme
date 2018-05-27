@@ -187,6 +187,11 @@ $(document).ready(function() {
               $('div[data-tab = "1"]').removeClass('active');
               $('a[data-tab = "2"]').addClass('active');
               $('div[data-tab = "2"]').addClass('active');
+              $("#distpicker1").distpicker({
+                province: '---- 所在省 ----',
+                city: '---- 所在市 ----',
+                district: '---- 所在区 ----'
+              });
             });
             $('.cart-box-2-backward').click(function() {
               $('a[data-tab = "2"]').removeClass('active');
