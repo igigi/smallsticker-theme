@@ -6,7 +6,7 @@
   </div>
   <div class="ui divider"></div>
   <div class="equal width row">
-    {% assign products = site.products | where: "categories", "贴纸" %}
+    {% assign products = site.products | where: "categories", "贴纸" | where: "in_index", "1" %}
     <div class="ui four doubling stackable cards">
       {% for product in products limit:4 %}
         <div class="card">
@@ -27,7 +27,7 @@
   </div>
   <div class="ui divider"></div>
   <div class="equal width row">
-    {% assign products = site.products | where: "categories", "马克杯" %}
+    {% assign products = site.products | where: "categories", "马克杯" | where: "in_index", "1" %}
     <div class="ui four doubling stackable cards">
       {% for product in products limit:4 %}
         <div class="card">
@@ -48,7 +48,7 @@
   </div>
   <div class="ui divider"></div>
   <div class="equal width row">
-    {% assign products = site.products | where: "categories", "短袖" %}
+    {% assign products = site.products | where: "categories", "短袖" | where: "in_index", "1" %}
     <div class="ui four doubling stackable cards">
       {% for product in products limit:4 %}
         <div class="card">
@@ -69,7 +69,7 @@
   </div>
   <div class="ui divider"></div>
   <div class="equal width row">
-    {% assign products = site.products | where: "categories", "卫衣" %}
+    {% assign products = site.products | where: "categories", "卫衣" | where: "in_index", "1" %}
     <div class="ui four doubling stackable cards">
       {% for product in products limit:4 %}
         <div class="card">
