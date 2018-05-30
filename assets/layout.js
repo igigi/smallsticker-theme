@@ -42,7 +42,7 @@ $(document)
 
 
 
-    $("#nav").addClass("js").before('<i class="big sidebar icon " id="menu"></i><a class="item right floated gift-box" id="gift-box"><i class="cart red large icon"></i>礼盒<div class="ui left pointing teal label" id="mobile-gift-counter">等我一下</div></a>');
+    $("#nav").addClass("js").before('<i class="big sidebar icon " id="menu"></i><a class="item right floated gift-box" id="gift-box"><i class="cart red large icon"></i><div class="ui left pointing teal label" id="mobile-gift-counter">等我一下</div></a>');
   	$("#menu").click(function(){
       $(".gift-box").toggle();
   		$("#nav").toggle();

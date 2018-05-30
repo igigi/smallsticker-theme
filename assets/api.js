@@ -165,8 +165,8 @@ $(document).ready(function() {
         $(this).state('flash text');
       },
       text: {
-        active     : '<i class="plus icon"></i>放入礼盒',
-        flash      : '<i class="archive icon"></i>已放入礼盒'
+        active     : '<i class="plus icon"></i>放入购物车',
+        flash      : '<i class="archive icon"></i>已放入购物车'
       }
     });
 
