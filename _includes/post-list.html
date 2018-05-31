@@ -7,7 +7,7 @@
 <h1 class="ui dividing header">博客</h1>
 <span>标签：</span>
 {% for tag in site.tags %}
-    <a class="ui tag tiny yellow label" href="/标签/博客标签/{{ tag[0] }}">{{ tag[0] | capitalize }}</a>
+    <a class="ui tag tiny yellow label" href="/标签/博客标签/{{ tag[0] }}.html">{{ tag[0] | capitalize }}</a>
 {% endfor %}
 <div class="ui divided items">
   {% for post in site.posts %}
