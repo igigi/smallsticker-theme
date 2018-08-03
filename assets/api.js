@@ -231,8 +231,8 @@ $(document).ready(function() {
                     identifier: 'phone',
                     rules: [
                       {
-                        type   : 'empty',
-                        prompt : '请填写联系电话'
+                        type   : 'regExp[/^[1][3,4,5,7,8][0-9]{9}$/]',
+                        prompt : '请检查手机号'
                       }
                     ]
                   },

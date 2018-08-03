@@ -1,86 +1,103 @@
 <div class="ui grid">
-  <div class="center aligned row">
-    <div class="column">
-      <h4 class="ui header">贴纸</h4>
-    </div>
-  </div>
-  <div class="ui divider"></div>
+
   <div class="equal width row">
     {% assign products = site.products | where: "categories", "贴纸" | where: "in_index", "1" %}
     <div class="ui four doubling stackable cards">
       {% for product in products limit:4 %}
         <div class="card">
-          {% include product.html %}
+          <a class="ui image" href="{{ site.baseurl }}{{ product.url }}">
+            <img  src="{{ product.image | relative_url }}" alt="{{ product.name }}"/>
+          </a>
+          <div class="content">
+            <a class="meta" href="{{ site.baseurl }}{{ product.url }}">{{ product.name }}</a>
+            <div class="meta right floated">
+              价格：<i class="yen icon"></i>{{ product.price }}
+            </div>
+          </div>
+
         </div>
       {% endfor %}
     </div>
   </div>
   <div class="right aligned row">
     <div class="column">
-      <a href="/贴纸/index.html">更多...</a>
+      <a href="/贴纸/index.html">更多<i class="right chevron icon"></i></a>
     </div>
   </div>
-  <div class="center aligned row">
-    <div class="column">
-      <h4 class="ui header">马克杯</h4>
-    </div>
-  </div>
-  <div class="ui divider"></div>
+
   <div class="equal width row">
     {% assign products = site.products | where: "categories", "马克杯" | where: "in_index", "1" %}
     <div class="ui four doubling stackable cards">
       {% for product in products limit:4 %}
-        <div class="card">
-          {% include product.html %}
+      <div class="card">
+        <a class="ui image" href="{{ site.baseurl }}{{ product.url }}">
+          <img  src="{{ product.image | relative_url }}" alt="{{ product.name }}"/>
+        </a>
+        <div class="content">
+          <a class="meta" href="{{ site.baseurl }}{{ product.url }}">{{ product.name }}</a>
+          <div class="meta right floated">
+            价格：<i class="yen icon"></i>{{ product.price }}
+          </div>
         </div>
+
+      </div>
       {% endfor %}
     </div>
   </div>
   <div class="right aligned row">
     <div class="column">
-      <a href="/马克杯/index.html">更多...</a>
+      <a href="/马克杯/index.html">更多<i class="right chevron icon"></i></a>
     </div>
   </div>
-  <div class="center aligned row">
-    <div class="column">
-      <h4 class="ui header">短袖</h4>
-    </div>
-  </div>
-  <div class="ui divider"></div>
+
   <div class="equal width row">
     {% assign products = site.products | where: "categories", "短袖" | where: "in_index", "1" %}
     <div class="ui four doubling stackable cards">
       {% for product in products limit:4 %}
-        <div class="card">
-          {% include product.html %}
+      <div class="card">
+        <a class="ui image" href="{{ site.baseurl }}{{ product.url }}">
+          <img  src="{{ product.image | relative_url }}" alt="{{ product.name }}"/>
+        </a>
+        <div class="content">
+          <a class="meta" href="{{ site.baseurl }}{{ product.url }}">{{ product.name }}</a>
+          <div class="meta right floated">
+            价格：<i class="yen icon"></i>{{ product.price }}
+          </div>
         </div>
+
+      </div>
       {% endfor %}
     </div>
   </div>
   <div class="right aligned row">
     <div class="column">
-      <a href="/短袖/index.html">更多...</a>
+      <a href="/短袖/index.html">更多<i class="right chevron icon"></i></a>
     </div>
   </div>
-  <div class="center aligned row">
-    <div class="column">
-      <h4 class="ui header">卫衣</h4>
-    </div>
-  </div>
-  <div class="ui divider"></div>
+
+
   <div class="equal width row">
     {% assign products = site.products | where: "categories", "卫衣" | where: "in_index", "1" %}
     <div class="ui four doubling stackable cards">
       {% for product in products limit:4 %}
-        <div class="card">
-          {% include product.html %}
+      <div class="card">
+        <a class="ui image" href="{{ site.baseurl }}{{ product.url }}">
+          <img  src="{{ product.image | relative_url }}" alt="{{ product.name }}"/>
+        </a>
+        <div class="content">
+          <a class="meta" href="{{ site.baseurl }}{{ product.url }}">{{ product.name }}</a>
+          <div class="meta right floated">
+            价格：<i class="yen icon"></i>{{ product.price }}
+          </div>
         </div>
+
+      </div>
       {% endfor %}
     </div>
   </div>
   <div class="right aligned row">
     <div class="column">
-      <a href="/卫衣/index.html">更多...</a>
+      <a href="/卫衣/index.html">更多<i class="right chevron icon"></i></a>
     </div>
   </div>
 </div>

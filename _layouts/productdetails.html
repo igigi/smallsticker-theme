@@ -19,14 +19,15 @@ head:
           <a class="ui yellow ribbon label"  href="/标签/{{ page.categories }}标签/{{ tag }}">{{ tag | capitalize }}</a><br /><br />
         {% endfor %}
       </div>
+
       <img src="{{ page.image | relative_url }}" alt="{{ page.name }}">
     </div>
   </div>
   <div class="column">
-    <h2 class="sub header">
-      <span>价格：<i class="yen icon"></i>{{ page.price }}</span>
-    </h2>
-    <button class="smallsticker-add-item ui red button"
+    <div class="ui  large label">
+      价格：<i class="yen icon"></i>{{ page.price }}
+    </div>
+    <a class="smallsticker-add-item ui red large label"
       data-item-name="{{ page.name }}"
       data-item-id="{{ page.sku }}"
       data-item-image="{{ page.image }}"
@@ -34,7 +35,7 @@ head:
       data-item-price="{{ page.price }}">
       <i class="plus icon"></i>
       放入购物车
-    </button>
+    </a>
     <div class="ui divider" ></div>
 
     <div class="ui top attached tabular menu">
