@@ -19,7 +19,6 @@ function getGiftCounter(cartId) {
     });
   } else {
     $.post(apiAddress + '/carts', function(data) {
-      sessionStorage.setItem('cart_id', data.cart.uuid);
       document.cookie = "cart_id=" + data.cart.uuid;
       cartId = document.cookie.replace(/(?:(?:^|.*;\s*)cart_id\s*\=\s*([^;]*).*$)|^.*$/, "$1");
       $('#gift-counter').text(data.cart.items_count);
