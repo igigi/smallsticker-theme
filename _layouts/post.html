@@ -7,15 +7,15 @@ layout: home
   <i class="right angle icon divider"></i>
   <a class="section" href="/博客.html">博客列表</a>
   <i class="right angle icon divider"></i>
-  <div class="active section">新闻详情</div>
+  <div class="active section">博客详情</div>
 </div>
 <div class="ui text segment container">
 <article itemscope itemtype="http://schema.org/BlogPosting">
 
   <header>
-    <img class="ui bordered rounded centered image" src="{{ page.image | relative_url}}" alt="{{ page.title }}" />
-    <h1 class="ui dividing header" itemprop="name headline">{{ page.title | escape }}
-
+    <img class="ui centered image" src="{{ page.image | relative_url}}" alt="{{ page.title }}" />
+    <h1 class="ui  header" itemprop="name headline">{{ page.title | escape }}
+<div class="ui divider" ></div>
     <div class="sub header">
       {% if page.author %}
       <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span> |

@@ -1,4 +1,15 @@
 
+
+@media screen and (max-width: 768px) {
+  #nav.js {
+    display: none;
+  }
+}
+@media screen and (min-width: 768px) {
+  #menu, #gift-box {
+    display: none;
+  }
+}
 /* change style */
 .ui.sticky.fixed {
   background-color: #A0A0A0;
