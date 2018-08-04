@@ -44,36 +44,42 @@ function giftBoxModify () {
 
         $('#' + item.id + '.plus-item').click(function() {
           var quantity = Number($('#quantity-' + item.id).text()) + 1
-          var totalPrice = Number($('#total-price-' + item.id).text())
-          var allTotalPrice= Number($('#total-price').text());
           if (quantity > 1) {
             $.ajax({
               method: "PUT",
               url: apiAddress + "/carts/" + cartId + '/items/' + item.id,
               data: { quantity: quantity }
             })
-              .done(function() {
-                $('#quantity-' + item.id).text(quantity);
-                $('#total-price-' + item.id).text(totalPrice + price);
-                $('#total-price').text(allTotalPrice + price);
+              .done(function(data) {
+                $('#quantity-' + item.id).text(data.data.attributes.quantity);
+                $('#total-price-' + item.id).text(data.data.attributes.total_price);
+                $('#total-price').text(data.meta.cart_total_price);
+                if (data.meta.is_freight_free) {
+                  $('.display-freight').css("display", "block");
+                } else {
+                  $('.display-freight').css("display", "none");
+                };
               });
             };
         });
 
         $('#' + item.id + '.minus-item').click(function() {
           var quantity = Number($('#quantity-' + item.id).text()) - 1
-          var totalPrice = Number($('#total-price-' + item.id).text())
-          var allTotalPrice= Number($('#total-price').text());
           if (quantity > 0) {
             $.ajax({
               method: "PUT",
               url: apiAddress + "/carts/" + cartId + '/items/' + item.id,
               data: { quantity: quantity }
             })
-              .done(function() {
-                $('#quantity-' + item.id).text(quantity);
-                $('#total-price-' + item.id).text(totalPrice - price);
-                $('#total-price').text(allTotalPrice - price);
+              .done(function(data) {
+                $('#quantity-' + item.id).text(data.data.attributes.quantity);
+                $('#total-price-' + item.id).text(data.data.attributes.total_price);
+                $('#total-price').text(data.meta.cart_total_price);
+                if (data.meta.is_freight_free) {
+                  $('.display-freight').css("display", "block");
+                } else {
+                  $('.display-freight').css("display", "none");
+                };
               });
             };
         });
@@ -85,20 +91,32 @@ function giftBoxModify () {
             method: "DELETE",
             url: apiAddress + "/carts/" + cartId + '/items/' + item.id,
           })
-            .done(function() {
+            .done(function(data) {
               $('tr#' + item.id).remove();
-              if (allTotalPrice == totalPrice) {
+              if (data.meta.cart_total_price == data.meta.cart_freight) {
+                $('.fullscreen.modal').modal('hide');
                 $('.standart.modal').modal('show');
                 getGiftCounter(cartId);
               } else {
-                $('#total-price').text(allTotalPrice - totalPrice);
+                $('#total-price').text(data.meta.cart_total_price);
+                if (data.meta.is_freight_free) {
+                  $('.display-freight').css("display", "block");
+                } else {
+                  $('.display-freight').css("display", "none");
+                };
               }
             })
         });
 
       });
       $('#cart-freight').text(data.meta.cart_freight);
+      $('#free-cart-freight').text(data.meta.cart_freight);
       $('#total-price').text(data.meta.cart_total_price);
+      if (data.meta.is_freight_free) {
+        $('.display-freight').css("display", "block");
+      } else {
+        $('.display-freight').css("display", "none");
+      };
     }
   });
 };
